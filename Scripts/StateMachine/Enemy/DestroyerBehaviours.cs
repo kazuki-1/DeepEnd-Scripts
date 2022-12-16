@@ -4,7 +4,24 @@ using UnityEngine;
 
 namespace DestroyerStates
 {
-    public class DestroyerState_Approach : StateBase
+
+    public abstract class DestroyerState_Base : StateBase
+    {
+        protected DestroyerArmamentController controller;
+        protected StateMachineBase GetStateMachine()
+        {
+            return controller.GetComponent<EnemyDestroyerController>().stateMachine;
+        }
+        protected void Transition(int nextState_)
+        {
+            GetStateMachine().Transition(nextState_);
+        }
+    
+    }
+
+
+
+    public class DestroyerState_Approach : DestroyerState_Base
     {
         private Transform target;
         private Vector3 direction;
@@ -18,35 +35,78 @@ namespace DestroyerStates
         public override void Execute(GameObject parent)
         {
             GameObject player = GameObject.Find("DeepEndPlayer");
-
-
-            
+            EnemyDestroyerController controller = parent.GetComponent<EnemyDestroyerController>();
 
             Transform transform = parent.transform;
             target = player.transform;
+            controller.movementSpeed = Mathf.Lerp(controller.movementSpeed, controller.maximumSpeed, 0.05f);
 
-            direction =  target.position - transform.position;
 
-
+            direction = target.position - transform.position;
             target_rotation = Quaternion.FromToRotation(Vector3.forward, direction.normalized);
-
-
-
-
             transform.rotation = Quaternion.Lerp(transform.rotation, target_rotation, 0.7f * Time.deltaTime);
-            
+            transform.position += parent.transform.forward * controller.movementSpeed * Time.deltaTime;
 
-            parent.transform.position += parent.transform.forward * 0.5f;
 
 
             float distance = Vector3.Magnitude(target.position - transform.position);
-            if (distance < 10.0f)
-                parent.GetComponent<DeepEndEntityController>().Transition((int)DestroyerStateMachine.StateEnum.PursuitAndAttack);
+            if (distance < controller.firingRange)
+                Transition((int)DestroyerStateMachine.StateEnum.PursuitAndAttack);
 
         }
 
         public override void End(GameObject parent)
         {
+            target = null;
+            direction = Vector3.zero;
+            target_rotation = Quaternion.identity;
+        }
+
+
+
+    }
+
+    public class DestroyerState_PursuitAndAttack : DestroyerState_Base
+    {
+
+        private Transform target;
+        private Vector3 direction;
+        private Quaternion target_rotation;
+
+
+        public override void Initialize(GameObject parent)
+        {
+
+        }
+
+        public override void Execute(GameObject parent)
+        {
+
+            GameObject player = GameObject.Find("DeepEndPlayer");
+            EnemyDestroyerController controller = parent.GetComponent<EnemyDestroyerController>();
+
+            Transform transform = parent.transform;
+            target = player.transform;
+            controller.movementSpeed = Mathf.Lerp(controller.movementSpeed, controller.maximumSpeed, 0.05f);
+
+
+            direction = target.position - transform.position;
+            target_rotation = Quaternion.FromToRotation(Vector3.forward, direction.normalized);
+            transform.rotation = Quaternion.Lerp(transform.rotation, target_rotation, 0.7f * Time.deltaTime);
+            transform.position += parent.transform.forward * controller.movementSpeed * Time.deltaTime;
+            controller.GetComponent<ArmamentController>().FireArmaments();
+
+            if ((player.transform.position - transform.position).magnitude < controller.rammingRange)
+                Transition((int)DestroyerStateMachine.StateEnum.Ramming);
+
+
+        }
+
+        public override void End(GameObject parent)
+        {
+            target = null;
+            direction = Vector3.zero;
+            target_rotation = Quaternion.identity;
 
         }
 
@@ -54,8 +114,7 @@ namespace DestroyerStates
 
     }
 
-    
-    public class DestroyerState_PursuitAndAttack : StateBase
+    public class DestroyerState_Ramming : DestroyerState_Base
     {
 
         public override void Initialize(GameObject parent)
@@ -77,7 +136,7 @@ namespace DestroyerStates
 
     }
 
-    public class DestroyerState_Ramming : StateBase
+    public class DestroyerState_Sunk : DestroyerState_Base
     {
 
         public override void Initialize(GameObject parent)
@@ -99,29 +158,7 @@ namespace DestroyerStates
 
     }
 
-    public class DestroyerState_Sunk : StateBase
-    {
-
-        public override void Initialize(GameObject parent)
-        {
-
-        }
-
-        public override void Execute(GameObject parent)
-        {
-
-        }
-
-        public override void End(GameObject parent)
-        {
-
-        }
-
-
-
-    }
-
-    public class DestroyerState_Debug : StateBase
+    public class DestroyerState_Debug : DestroyerState_Base
     {
         List<Vector3> points = new List<Vector3>();
         float distance = 1000.0f;

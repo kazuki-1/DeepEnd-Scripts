@@ -103,7 +103,7 @@ namespace HomingTorpedoStates
                 if (Vector3.Distance(controller.transform.position, obj.transform.position) < MainController.Get().maximumTorpedoRange)
                     continue;
                 Vector3 dist = obj.transform.position - controller.transform.position;
-                AudioSource audioSource = obj.GetComponentInChildren<AudioSource>();
+                AudioInterface audioSource = obj.GetComponentInChildren<AudioInterface>();
 
                 // Check if within firing angle
                 float angle = Vector3.Angle(direction, dist.normalized);
@@ -111,9 +111,8 @@ namespace HomingTorpedoStates
                     continue;
 
                 // Generate a wave file
-                textures.Add(index, MainController.Get().GenerateTextureFromAudio(audioSource, 1280, 500));
+                textures.Add(index, audioSource.GetTexture()/*MainController.Get().GenerateTextureFromAudio(audioSource.audioSource, 1280, 500)*/);
                 targets.Add(index, obj);
-
 
 
                 ++index;
@@ -172,7 +171,6 @@ namespace HomingTorpedoStates
                     }
                 }
             }
-
             targetPanel.transform.position = Vector3.Lerp(targetPanel.transform.position, uiObjs[selected_index - current_index].transform.position, 0.02f);
             MainController.Get().MuteAllExcept(targets[selected_index].GetComponentInChildren<AudioSource>().gameObject);
 

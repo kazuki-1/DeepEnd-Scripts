@@ -142,16 +142,18 @@ public class ArmamentController : MonoBehaviour
         ArmamentList cur = armaments[(int)current_armament];
         foreach (ArmamentBase armament in cur.list)
         {
+            // Only render targeting zone for torps
+            if (current_armament == Armaments.Cannon)
+                continue;
+
             if (armament.GetState())
             {
                 target.Enable();    
                 target.SetPosition(armament);
                 break;
             }
-            else/* if (!armament.isReloading && armament.outOfBounds)*/
+            else
                 target.Disable();
-            //else
-            //    target.Disable();
         }
     }
 

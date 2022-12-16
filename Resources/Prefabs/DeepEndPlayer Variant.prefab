@@ -10,7 +10,11 @@ GameObject:
   m_Component:
   - component: {fileID: 1649742961}
   - component: {fileID: 1649742963}
-  - component: {fileID: 1649742962}
+  - component: {fileID: 1496637954587725772}
+  - component: {fileID: 1373507731848042495}
+  - component: {fileID: 4864212383819139193}
+  - component: {fileID: 6563688337305333684}
+  - component: {fileID: 5021209335473395508}
   m_Layer: 0
   m_Name: AudioListener
   m_TagString: Untagged
@@ -41,7 +45,68 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1649742960}
   m_Enabled: 1
---- !u!114 &1649742962
+--- !u!114 &1496637954587725772
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1649742960}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 087837e5f42ec5b4fa9dba3ee7790e01, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_listeners:
+    initialListenerList: []
+    useDefaultListeners: 1
+  isEnvironmentAware: 1
+  isStaticObject: 0
+  m_positionOffsetData:
+    KeepMe: 0
+    positionOffset: {x: 0, y: 0, z: 0}
+  m_posOffsetData: {fileID: 0}
+  listenerMask: 1
+--- !u!114 &1373507731848042495
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1649742960}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a393278a379c15418ca31cacf12f975, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isDefaultListener: 1
+  listenerId: 0
+--- !u!114 &4864212383819139193
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1649742960}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 440c945ee1b61cc459f878ccc6340d38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Collider: {fileID: 0}
+--- !u!114 &6563688337305333684
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1649742960}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 213740405662210469715a071dbcb73e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5021209335473395508
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -206,6 +271,14 @@ PrefabInstance:
       propertyPath: UIPosition.y
       value: -320
       objectReference: {fileID: 0}
+    - target: {fileID: 866973281488697899, guid: 74d0740f4abc7e54fab50d33af2582da, type: 3}
+      propertyPath: deadZoneAngle.x
+      value: 52
+      objectReference: {fileID: 0}
+    - target: {fileID: 866973281488697899, guid: 74d0740f4abc7e54fab50d33af2582da, type: 3}
+      propertyPath: deadZoneAngle.y
+      value: 128.1
+      objectReference: {fileID: 0}
     - target: {fileID: 1587022633386966590, guid: 74d0740f4abc7e54fab50d33af2582da, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -242,6 +315,14 @@ PrefabInstance:
       propertyPath: UIPosition.y
       value: -320
       objectReference: {fileID: 0}
+    - target: {fileID: 3610083531221999730, guid: 74d0740f4abc7e54fab50d33af2582da, type: 3}
+      propertyPath: deadZoneAngle.x
+      value: 52
+      objectReference: {fileID: 0}
+    - target: {fileID: 3610083531221999730, guid: 74d0740f4abc7e54fab50d33af2582da, type: 3}
+      propertyPath: deadZoneAngle.y
+      value: 128.1
+      objectReference: {fileID: 0}
     - target: {fileID: 3957504253654491328, guid: 74d0740f4abc7e54fab50d33af2582da, type: 3}
       propertyPath: UIPosition.x
       value: -125
@@ -249,6 +330,14 @@ PrefabInstance:
     - target: {fileID: 3957504253654491328, guid: 74d0740f4abc7e54fab50d33af2582da, type: 3}
       propertyPath: UIPosition.y
       value: -320
+      objectReference: {fileID: 0}
+    - target: {fileID: 3957504253654491328, guid: 74d0740f4abc7e54fab50d33af2582da, type: 3}
+      propertyPath: deadZoneAngle.x
+      value: 52
+      objectReference: {fileID: 0}
+    - target: {fileID: 3957504253654491328, guid: 74d0740f4abc7e54fab50d33af2582da, type: 3}
+      propertyPath: deadZoneAngle.y
+      value: 128.1
       objectReference: {fileID: 0}
     - target: {fileID: 3957504253654491328, guid: 74d0740f4abc7e54fab50d33af2582da, type: 3}
       propertyPath: fire_position.z
@@ -301,6 +390,10 @@ PrefabInstance:
     - target: {fileID: 4688074040619284954, guid: 74d0740f4abc7e54fab50d33af2582da, type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5227713560549014589, guid: 74d0740f4abc7e54fab50d33af2582da, type: 3}
+      propertyPath: m_Name
+      value: TorpedoFront
       objectReference: {fileID: 0}
     - target: {fileID: 5883913355493869644, guid: 74d0740f4abc7e54fab50d33af2582da, type: 3}
       propertyPath: m_Layer
@@ -360,11 +453,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7240957935404918475, guid: 74d0740f4abc7e54fab50d33af2582da, type: 3}
       propertyPath: deadZoneAngle.x
-      value: 49.44
+      value: 52
       objectReference: {fileID: 0}
     - target: {fileID: 7240957935404918475, guid: 74d0740f4abc7e54fab50d33af2582da, type: 3}
       propertyPath: deadZoneAngle.y
-      value: 140.54
+      value: 128.1
       objectReference: {fileID: 0}
     - target: {fileID: 7240957935404918475, guid: 74d0740f4abc7e54fab50d33af2582da, type: 3}
       propertyPath: fire_position.z
@@ -377,6 +470,14 @@ PrefabInstance:
     - target: {fileID: 7313287791085367041, guid: 74d0740f4abc7e54fab50d33af2582da, type: 3}
       propertyPath: m_TagString
       value: MinimapObject
+      objectReference: {fileID: 0}
+    - target: {fileID: 7813177437808722275, guid: 74d0740f4abc7e54fab50d33af2582da, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7950419428649554259, guid: 74d0740f4abc7e54fab50d33af2582da, type: 3}
+      propertyPath: m_Name
+      value: TorpedoBack
       objectReference: {fileID: 0}
     - target: {fileID: 7950419428649554259, guid: 74d0740f4abc7e54fab50d33af2582da, type: 3}
       propertyPath: m_Layer

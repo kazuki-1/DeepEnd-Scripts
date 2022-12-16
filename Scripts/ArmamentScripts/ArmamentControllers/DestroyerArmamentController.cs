@@ -30,8 +30,8 @@ public class DestroyerArmamentController : ArmamentController
     }
     public override void Update()
     {
-        SelectArmament();
-        FireArmaments();
+        //SelectArmament();
+        //FireArmaments();
         RotateArmament();
 
     }

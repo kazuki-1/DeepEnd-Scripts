@@ -12,7 +12,7 @@ public class SubmarineStateMachine : StateMachineBase
         Approach,
         Surface,
         Submerge,
-        Attack,
+        PursuitAndAttack,
         Sink,
         Retreat
     }
@@ -24,7 +24,7 @@ public class SubmarineStateMachine : StateMachineBase
         states.Add((int)StateEnum.Approach, new SubmarineState_Approach());
         states.Add((int)StateEnum.Surface, new SubmarineState_Surface());
         states.Add((int)StateEnum.Submerge, new SubmarineState_Submerge());
-        states.Add((int)StateEnum.Attack, new SubmarineState_Attack());
+        states.Add((int)StateEnum.PursuitAndAttack, new SubmarineState_PursuitAndAttack());
         states.Add((int)StateEnum.Sink, new SubmarineState_Sunk());
         states.Add((int)StateEnum.Retreat, new SubmarineState_Retreat());
 

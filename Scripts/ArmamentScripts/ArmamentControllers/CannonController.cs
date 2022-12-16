@@ -8,6 +8,8 @@ public class CannonController : ArmamentBase
     // Start is called before the first frame update
     void Awake()
     {
+
+        
         stateMachine = new CannonStateMachine();
         (stateMachine as CannonStateMachine).controller = this;
         stateMachine.Initialize(gameObject);
@@ -20,24 +22,25 @@ public class CannonController : ArmamentBase
 
         starting_position = transform.position;
         starting_direction = transform.forward;
+        fireEvent = MainController.Get().batteryParameters.fireSFXEvent;
     }
 
     // Update is called once per frame
-    //void Update()
-    //{
-    //    stateMachine.Execute();
-
-    //}
+    // public override void Update()
+    // {
+    //     base.Update();
+    // 
+    // 
+    // }
 
     public override void Fire()
     {
 
-        if (outOfBounds )
-            return;
-        if(!isReloading)
+        if (!isReloading && !outOfBounds)
+        {
             stateMachine.Transition((int)CannonStateMachine.StateEnum.Fire);
-
-
+            fireEvent.Post(gameObject);
+        }
 
 
     }

@@ -10,7 +10,7 @@ public class ArmamentBase : MonoBehaviour
     /*------------------------------------Variables-----------------------------------*/
     /*--------------------------------------------------------------------------------*/
     /*--------------------------------------------------------------------------------*/
-
+    protected AK.Wwise.Event fireEvent;
 
     [HideInInspector]
     protected StateMachineBase stateMachine;
@@ -32,6 +32,8 @@ public class ArmamentBase : MonoBehaviour
 
     [SerializeField]
     public Vector2 UIPosition;
+
+    
 
 
     protected Vector3 starting_position;
@@ -129,9 +131,14 @@ public class ArmamentBase : MonoBehaviour
         Vector3 forward = Camera.main.transform.forward;
         forward.y = 0;
         forward.Normalize();
+        float threshold = MainController.Get().armamentAngleDifferenceThreshold;
+        if (Mathf.Abs(Vector3.Angle(transform.forward.normalized, forward)) > threshold)
+            outOfBounds = true;
+
+
         Quaternion q = Quaternion.LookRotation(forward, transform.up);
         target_direction = point.normalized;
-        transform.localRotation = Quaternion.Slerp(transform.localRotation, q, 0.3f);
+        transform.localRotation = Quaternion.Slerp(transform.localRotation, q, 0.003f);
 
 
     }
@@ -187,17 +194,18 @@ public class ArmamentBase : MonoBehaviour
     /// Only use this for enemies. Checks if the target is equal or close to the forward vector of this object
     /// </summary>
     /// <returns></returns>
-    public bool CheckDirectionToTarget(Transform target)
+    public bool CheckDirectionToTarget(Transform target, float angle = 10.0f)
     {
-        Vector3 dir = target.position - transform.position;
+        return CheckDirectionToTarget(target.position, angle);
+    }
+
+    public bool CheckDirectionToTarget(Vector3 target, float angle = 10.0f)
+    {
+        Vector3 dir = target- transform.position;
         dir.Normalize();
-        if (Vector3.Angle(transform.forward, dir) > 10.0f)
+        if (Vector3.Angle(transform.forward, dir) > angle)
             return false;
         return true;
-
-
-
-
     }
 
 }

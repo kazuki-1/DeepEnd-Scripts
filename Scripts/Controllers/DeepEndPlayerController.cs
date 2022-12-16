@@ -6,14 +6,10 @@ public class DeepEndPlayerController : DeepEndEntityController
 {
 
     
-    float Lerp(float f1, float f2, float factor)
-    {
-        return f1 + (f2 - f1) * factor;
-    }
 
 
     [SerializeField]
-    private float static_speed = 5.0f;
+    private float static_speed = 50.0f;
 
     [SerializeField]
     private float incremental_speed;
@@ -21,6 +17,9 @@ public class DeepEndPlayerController : DeepEndEntityController
     [SerializeField]
     private Vector2 speedLimit = new Vector2(-5.0f, 15.0f);
 
+    
+
+    
 
     [SerializeField]
     private float smoothness = 0.05f;
@@ -28,16 +27,20 @@ public class DeepEndPlayerController : DeepEndEntityController
     [SerializeField]
     private int accelerationStageCount = 5;
 
-
-    static private float movement;      // Player velocity
+    [HideInInspector]
+    static public Vector3 movement = new Vector3();      // Player velocity
     static private int accel_state;     // Stage of acceleration
     static private float acceleration_flatRate;    // Acceleration per frame
+    private Vector3 default_speed;
 
 
     // Start is called before the first frame update
     void Start()
     {
-        movement = static_speed;
+        movement.z = static_speed;
+        default_speed = movement;
+
+        // How much speed is changed everytime you speed up or down
         acceleration_flatRate = incremental_speed / (float)accelerationStageCount;
 
         if (stateMachine == null)
@@ -57,23 +60,25 @@ public class DeepEndPlayerController : DeepEndEntityController
             AccelControl();
 
 
-
-            movement = static_speed + (acceleration_flatRate * accel_state);
+            // Speed control
+            movement = transform.forward * (static_speed + (acceleration_flatRate * accel_state)) ;
             if(accel_state == 0)
-                movement = Lerp(movement, static_speed, smoothness);
+                movement = Vector3.Lerp(movement, default_speed, smoothness);
 
-            Mathf.Clamp(movement, speedLimit.x, speedLimit.y);
+            //Mathf.Clamp(movement, speedLimit.x, speedLimit.y);
+
+
+            movement *= Time.deltaTime;
 
             //Vector3 position = transform.position;
-            //position.z += movement * Time.deltaTime;
+            //position += movement;
             //transform.position = position;
 
-            
 
 
         }
 
-        if(Input.GetKey(KeyCode.LeftControl))
+        if (Input.GetKey(KeyCode.LeftControl))
         {
             if(Input.GetKeyDown(KeyCode.R))
             {
@@ -114,6 +119,9 @@ public class DeepEndPlayerController : DeepEndEntityController
         accel_state = Mathf.Clamp(accel_state, -1, accelerationStageCount);
     }
 
-
+    public Vector3 GetMovementVector()
+    {
+        return movement;
+    }
 
 }

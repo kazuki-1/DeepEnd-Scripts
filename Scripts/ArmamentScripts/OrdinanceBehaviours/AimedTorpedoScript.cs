@@ -40,7 +40,7 @@ public class AimedTorpedoScript : MonoBehaviour
         // Underwater
         else
         {
-            if (movement.magnitude < MainController.Get().maximumTorpedoSpeed)
+            if (movement.magnitude < MainController.Get().maximumTorpedoSpeed * Time.deltaTime)
             {
                 movement += direction * speed  * Time.deltaTime;
                 movement.y = 0;

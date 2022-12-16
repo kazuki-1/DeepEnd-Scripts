@@ -27,8 +27,10 @@ public class HomingTorpedoScript : MonoBehaviour
     private Vector3 movement;
 
     private bool hasHitWater = false;
+    private bool isArmed = false;
     private float speed;
     private float despawnTimer;
+    private float armingTime;
 
     private Timer timer;
 
@@ -47,13 +49,14 @@ public class HomingTorpedoScript : MonoBehaviour
 
         MainController.ArmamentParameters parameter = MainController.Get().homingTorpedoParameters;
         timer = new Timer((int)parameter.despawnTime);
+
         initial_direction = target.position - transform.position;
         initial_direction.Normalize();
         transform.LookAt(transform.position + initial_direction * 10.0f);
          movement = initial_direction * beginning_propulsion * Time.deltaTime;
         speed = parameter.speed;
 
-
+        armingTime = MainController.Get().torpedoArmingTime;
         
 
 
@@ -62,16 +65,17 @@ public class HomingTorpedoScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-        
+
+        if (timer.OnPass(armingTime))
+            isArmed = true;
         
         // Moment after launching from tubes
         if (!hasHitWater)
         {
-            //movement = movement * 0.9f;
-            movement.x *= 0.9f;
-            movement.z *= 0.9f;
-            movement.y -= 1.0f * Time.deltaTime;
+            movement = movement * 0.9f;
+            // movement.x *= 0.9f;
+            // movement.z *= 0.9f;
+            movement.y -= 10.0f * Time.deltaTime;
         }
         // Underwater
         else
@@ -108,9 +112,11 @@ public class HomingTorpedoScript : MonoBehaviour
         if (other.gameObject.GetComponent<WaterScript>() != null)
             hasHitWater = true;
 
+        if (!isArmed)
+            return;
+
         if (other.gameObject.GetComponent<DeepEndEntityController>() != null)
         {
-            // TODO : Damage functions here
             other.gameObject.GetComponent<DeepEndEntityController>().TakeDamage(MainController.Get().homingTorpedoParameters.damage);
             Object.Destroy(gameObject);
 
