@@ -18,7 +18,7 @@ public class AimedTorpedoTubeController : ArmamentBase
 
         ArmamentController armamentController = gameObject.GetComponentInParent<ArmamentController>();
         if (armamentController != null)
-            reload_time = armamentController.aimedTorpedoReloadTime;
+            reload_time = armamentController.reloadTimes.aimedTorpedo;
         (stateMachine as AimedTorpedoStateMachine).reload_time = reload_time;
 
         starting_position = transform.position;
@@ -28,9 +28,12 @@ public class AimedTorpedoTubeController : ArmamentBase
 
     public override void Fire()
     {
-        if(!outOfBounds && !isReloading)
+        ArmamentController controller = GetComponentInParent<ArmamentController>();
+        if ((!outOfBounds && !isReloading ) &&  !controller.CheckAmmo())
+        {
             stateMachine.Transition((int)AimedTorpedoStateMachine.StateEnum.Fire);
-
+            controller.munitions.aimedTorpedo -= barrel_count;
+        }
     }
 
     public override void RotateToPoint(Vector3 point)
@@ -133,4 +136,5 @@ public class AimedTorpedoTubeController : ArmamentBase
     {
         stateMachine.Transition((int)AimedTorpedoStateMachine.StateEnum.Ready);
     }
+
 }

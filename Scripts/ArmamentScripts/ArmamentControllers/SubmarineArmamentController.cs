@@ -11,8 +11,6 @@ public class SubmarineArmamentController : ArmamentController
     /*----------------------------------------------------------------------*/
     /*----------------------------------------------------------------------*/
 
-    //[SerializeField][Tooltip("Aiming angle for the torpedoes")]
-    //float fireAngle;
 
     Transform target;           // Player
 
@@ -30,31 +28,38 @@ public class SubmarineArmamentController : ArmamentController
     {
         base.Start();
         target = GameObject.FindWithTag("Player").transform;
+
     }
 
     public override void Update()
     {
 
-        FireArmaments();
+        //FireArmaments();
     }
 
 
     public override void FireArmaments()
     {
+        if (!CheckAmmo())
+            return;
         Vector3 dist = transform.position - target.position;
         float time = dist.magnitude / (MainController.Get().maximumTorpedoSpeed * Time.deltaTime);
         Math.Round(time, 2);
-        
-        Vector3 target_pos = MainController.Get().SimulateVectorMovement(transform.position, transform.GetComponent<DeepEndPlayerController>().GetMovementVector(), time);
+        Vector3 target_pos = MainController.Get().SimulateVectorMovement(target.position, target.GetComponent<DeepEndPlayerController>().GetMovementVector(), time);
         foreach (ArmamentList armamentList in armaments)
         {
             foreach (ArmamentBase armament in armamentList.list)
             {
-                if (armament.GetState() && armament.CheckDirectionToTarget(target_pos))
+                if (armament.GetState() && armament.CheckDirectionToTarget(target_pos, 30.0f))
                     armament.Fire();
             }
         }
     }
+
+    /// <summary>
+    /// Returns true if there are still munitions
+    /// </summary>
+    /// <returns></returns>
     //private void OnDrawGizmosSelected()
     //{
     //    Vector3 frontRight;
@@ -77,4 +82,10 @@ public class SubmarineArmamentController : ArmamentController
 
 
     //}
+
+    public override bool CheckAmmo()
+    {
+        return munitions.aimedTorpedo >= 0;
+     
+    }
 }

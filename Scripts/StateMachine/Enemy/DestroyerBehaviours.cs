@@ -7,7 +7,7 @@ namespace DestroyerStates
 
     public abstract class DestroyerState_Base : StateBase
     {
-        protected DestroyerArmamentController controller;
+        public DeepEndEnemyController controller;
         protected StateMachineBase GetStateMachine()
         {
             return controller.GetComponent<EnemyDestroyerController>().stateMachine;
@@ -29,7 +29,6 @@ namespace DestroyerStates
 
         public override void Initialize(GameObject parent)
         {
-
         }
 
         public override void Execute(GameObject parent)
@@ -50,7 +49,7 @@ namespace DestroyerStates
 
 
             float distance = Vector3.Magnitude(target.position - transform.position);
-            if (distance < controller.firingRange)
+            if (distance  < controller.firingRange * .5f)
                 Transition((int)DestroyerStateMachine.StateEnum.PursuitAndAttack);
 
         }
@@ -83,22 +82,23 @@ namespace DestroyerStates
         {
 
             GameObject player = GameObject.Find("DeepEndPlayer");
-            EnemyDestroyerController controller = parent.GetComponent<EnemyDestroyerController>();
 
             Transform transform = parent.transform;
             target = player.transform;
             controller.movementSpeed = Mathf.Lerp(controller.movementSpeed, controller.maximumSpeed, 0.05f);
 
 
-            direction = target.position - transform.position;
+            direction = target.forward;
             target_rotation = Quaternion.FromToRotation(Vector3.forward, direction.normalized);
             transform.rotation = Quaternion.Lerp(transform.rotation, target_rotation, 0.7f * Time.deltaTime);
             transform.position += parent.transform.forward * controller.movementSpeed * Time.deltaTime;
             controller.GetComponent<ArmamentController>().FireArmaments();
 
-            if ((player.transform.position - transform.position).magnitude < controller.rammingRange)
+            if ((player.transform.position - transform.position).magnitude < (controller as EnemyDestroyerController).rammingRange)
                 Transition((int)DestroyerStateMachine.StateEnum.Ramming);
 
+            if (!controller.GetComponent<DestroyerArmamentController>().CheckAmmo())
+                    Transition((int)DestroyerStateMachine.StateEnum.Ramming);
 
         }
 
@@ -136,12 +136,12 @@ namespace DestroyerStates
 
     }
 
-    public class DestroyerState_Sunk : DestroyerState_Base
+    public class DestroyerState_Sink : DestroyerState_Base
     {
 
         public override void Initialize(GameObject parent)
         {
-
+            //controller.Sink();
         }
 
         public override void Execute(GameObject parent)
@@ -155,6 +155,34 @@ namespace DestroyerStates
         }
 
 
+
+    }
+
+    public class DestroyerState_Retreat : DestroyerState_Base
+    {
+        Vector3 direction;
+        public override void Initialize(GameObject parent)
+        {
+            GameObject player = GameObject.FindGameObjectWithTag("Player");
+
+            direction = parent.transform.position - player.transform.position;
+            direction.Normalize();
+        }
+
+        public override void Execute(GameObject parent)
+        {
+
+            GameObject player = GameObject.FindGameObjectWithTag("Player");
+            parent.transform.position += direction * Time.deltaTime;
+            if ((parent.transform.position - player.transform.position).magnitude > 2500.0f)
+                End(parent);
+
+        }
+
+        public override void End(GameObject parent)
+        {
+            controller.GetComponent<DeepEndEntityController>().Destroy();
+        }
 
     }
 
@@ -197,14 +225,14 @@ namespace DestroyerStates
 
         public override void Execute(GameObject parent)
         {
-            Transform transform = parent.transform;
-            Vector3 dest = points[cur_index];
-            transform.LookAt(points[cur_index]);
-            transform.position = transform.position + transform.forward * 0.7f;
-            if ((transform.position - dest).magnitude < 10.0f)
-                ++cur_index;
-            if (cur_index > points.Count - 1)
-                cur_index = 0;
+            //Transform transform = parent.transform;
+            //Vector3 dest = points[cur_index];
+            //transform.LookAt(points[cur_index]);
+            //transform.position = transform.position + transform.forward * 0.7f;
+            //if ((transform.position - dest).magnitude < 10.0f)
+            //    ++cur_index;
+            //if (cur_index > points.Count - 1)
+            //    cur_index = 0;
             
         }
 

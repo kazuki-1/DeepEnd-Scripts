@@ -32,7 +32,7 @@ public class DeepEndPlayerController : DeepEndEntityController
     static private int accel_state;     // Stage of acceleration
     static private float acceleration_flatRate;    // Acceleration per frame
     private Vector3 default_speed;
-
+    Timer radarTimer;
 
     // Start is called before the first frame update
     void Start()
@@ -47,6 +47,7 @@ public class DeepEndPlayerController : DeepEndEntityController
             stateMachine = new DeepEndPlayerStateMachine();
         stateMachine.Initialize(gameObject);
 
+        radarTimer = new Timer(MainController.Get().radarCooldownTime);
     }
 
     // Update is called once per frame
@@ -57,7 +58,7 @@ public class DeepEndPlayerController : DeepEndEntityController
         {
             float speed = Input.GetAxis("Vertical");
 
-            AccelControl();
+            Controls();
 
 
             // Speed control
@@ -78,45 +79,65 @@ public class DeepEndPlayerController : DeepEndEntityController
 
         }
 
+        radarTimer.Execute();
+        DebugControls();
+        if (Input.GetKeyDown(KeyCode.Escape))
+            Application.Quit();
+
+    }
+
+    void DebugControls()
+    {
+        // Scene Reloading
         if (Input.GetKey(KeyCode.LeftControl))
         {
-            if(Input.GetKeyDown(KeyCode.R))
+            if (Input.GetKeyDown(KeyCode.R))
             {
                 Scene cur_Scene = SceneManager.GetActiveScene();
                 SceneManager.LoadScene(cur_Scene.name);
             }
         }
 
-
+        // Reload armaments
         else if (Input.GetKeyDown(KeyCode.R))
             GetComponent<ArmamentController>().ReloadAll();
-        if (Input.GetKeyDown(KeyCode.Escape))
-            Application.Quit();
 
     }
 
-    void AccelControl()
+    void Controls()
     {
-        string debug_accelstate = "Current Accel State = " + accel_state;
-        string debug_speed = "Current accelerate = " + movement;
-
-        if (Input.GetKeyDown(KeyCode.W))
+        // Acceleration controls
         {
-            accel_state++;
-            Debug.Log(debug_accelstate);
-            Debug.Log(debug_speed);
+            string debug_accelstate = "Current Accel State = " + accel_state;
+            string debug_speed = "Current accelerate = " + movement;
 
+            if (Input.GetKeyDown(KeyCode.W))
+            {
+                accel_state++;
+                Debug.Log(debug_accelstate);
+                Debug.Log(debug_speed);
+
+            }
+            else if (Input.GetKeyDown(KeyCode.S))
+            {
+                accel_state--;
+                Debug.Log(debug_accelstate);
+                Debug.Log(debug_speed);
+            }
+
+
+
+            accel_state = Mathf.Clamp(accel_state, -1, accelerationStageCount);
         }
-        else if (Input.GetKeyDown(KeyCode.S))
+
+        // Radar Controls
         {
-            accel_state--;
-            Debug.Log(debug_accelstate);
-            Debug.Log(debug_speed);
+            if (Input.GetKeyDown(KeyCode.F) && radarTimer.Done())
+            {
+                radarTimer.Reset();
+                Radar.Get().Activate();
+            }
         }
-
-
-
-        accel_state = Mathf.Clamp(accel_state, -1, accelerationStageCount);
     }
 
     public Vector3 GetMovementVector()

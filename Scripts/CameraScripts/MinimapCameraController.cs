@@ -15,6 +15,7 @@ public class MinimapCameraController : MonoBehaviour
     List<GameObject> enemies = new List<GameObject> ();
     static public MinimapCameraController Get()
     {
+        GameObject cam = GameObject.Find("MiniMapViewport");
         return GameObject.Find("MiniMapViewport").GetComponent<MinimapCameraController>();
     }
 

@@ -49,6 +49,8 @@ public class DestroyerArmamentController : ArmamentController
         }
     }
 
+    
+
     public override void RotateArmament()
     {
 
@@ -62,6 +64,11 @@ public class DestroyerArmamentController : ArmamentController
             }
         }
 
+    }
+
+    public override bool CheckAmmo()
+    {
+        return munitions.cannons >= 0;
     }
 
 }

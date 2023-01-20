@@ -11,6 +11,11 @@ public class EnemyDestroyerController : DeepEndEnemyController
     [Tooltip("Range for switching to ramming state")]
     public float rammingRange = 20.0f;
 
+    [Tooltip("Does not enable stateMachine to execute")]
+    public bool debugMode = false;
+
+    [Tooltip("Damage applied to player when ramming")]
+    public int rammingDamage = 10;
 
     // Start is called before the first frame update
     void Start()
@@ -19,7 +24,10 @@ public class EnemyDestroyerController : DeepEndEnemyController
         if (stateMachine == null)
             stateMachine = new DestroyerStateMachine();
         stateMachine.Initialize(gameObject);
-        stateMachine.Transition((int)DestroyerStateMachine.StateEnum.Debug);
+        if (debugMode)
+            stateMachine.Transition((int)DestroyerStateMachine.StateEnum.Debug);
+        else
+            stateMachine.Transition((int)DestroyerStateMachine.StateEnum.Approach);
     }
 
     // Update is called once per frame
@@ -38,6 +46,16 @@ public class EnemyDestroyerController : DeepEndEnemyController
 
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, rammingRange);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        DeepEndEntityController player = other.gameObject.GetComponent<DeepEndPlayerController>();
+        if (player)
+        {
+            player.TakeDamage(rammingDamage);
+            stateMachine.Transition((int)DestroyerStateMachine.StateEnum.Sink);
+        }
     }
 
 }

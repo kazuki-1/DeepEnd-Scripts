@@ -4,7 +4,16 @@ using UnityEngine;
 
 public class AimedTorpedoScript : MonoBehaviour
 {
-    // Start is called before the first frame update
+
+    /*---------------------------------------------------------------------------------*/
+    /*--------------------------------------Variables----------------------------------*/
+    /*---------------------------------------------------------------------------------*/
+
+
+    public GameObject explosionParticlePrefab;
+
+    [HideInInspector]
+    public GameObject source;       // Where the round is fired from
 
     [HideInInspector]
     public Vector3 direction = new Vector3(0, 0, 1);
@@ -12,11 +21,20 @@ public class AimedTorpedoScript : MonoBehaviour
     [HideInInspector]
     public float beginning_propulsion = 60.0f;
 
-    private Vector3 movement;
 
-    private bool hasHitWater = false;
-    private float speed;
+    GameObject explosionParticle;
+    Vector3 movement;
+    bool hasHitWater = false;
+    bool hasCollided = false;
+    float speed;
     float despawnTimer;
+
+    /*----------------------------------------------------------------------------------*/
+    /*---------------------------------------Functions----------------------------------*/
+    /*----------------------------------------------------------------------------------*/
+
+
+    // Start is called before the first frame update
     void Start()
     {
         MainController.ArmamentParameters parameter = MainController.Get().aimedTorpedoParameters;
@@ -34,7 +52,9 @@ public class AimedTorpedoScript : MonoBehaviour
         // Moment after launching from tubes
         if (!hasHitWater)
         {
-            movement = movement * 0.9f;
+            movement.x *= .9f;
+            movement.z *= .9f;
+
             movement.y -= 1.0f * Time.deltaTime;
         } 
         // Underwater
@@ -48,12 +68,14 @@ public class AimedTorpedoScript : MonoBehaviour
          }
         transform.position += movement;
 
-
+        // Despawns if on stage too long without hitting anything
         despawnTimer -= Time.deltaTime;
         if (despawnTimer < 0)
             Object.Destroy(gameObject);
 
-
+        // Despawns after explosion is finished
+        //if (explosionParticle && (!explosionParticle.GetComponent<ParticleSystem>().IsAlive() && hasCollided))
+        //    Object.Destroy(gameObject);
 
 
 
@@ -67,15 +89,37 @@ public class AimedTorpedoScript : MonoBehaviour
         if (other.gameObject.GetComponent<WaterScript>() != null)
             hasHitWater = true;
 
-        if(other.gameObject.GetComponent<DeepEndEntityController>() != null)
+        if (other.gameObject == source)
+            return;
+
+
+
+
+
+        if (other.gameObject.GetComponent<DeepEndEntityController>() != null)
         {
             // TODO : Damage functions here
             other.gameObject.GetComponent<DeepEndEntityController>().TakeDamage(MainController.Get().aimedTorpedoParameters.damage);
-            Object.Destroy(gameObject);
+
+
+            explosionParticle = Instantiate<GameObject>(explosionParticlePrefab);
+            explosionParticle.GetComponent<ParticleSystem>().Play();
+            explosionParticle.transform.localScale = new Vector3(30.0f, 30.0f, 30.0f);
+            //explosionParticle.transform.localPosition = new Vector3(0.0f, 0.0f, 0.0f);
+            Vector3 spawnPos = explosionParticle.transform.position;
+            spawnPos.y = 0.0f;      // Causes the particle to spawn on the water plane
+            hasCollided = true;
+
+            GetComponentInChildren<MeshRenderer>().enabled = false;
+
+
+
+            //Object.Destroy(gameObject);
         }
 
     }
     private void OnCollisionEnter(Collision collision)
     {
     }
+
 }

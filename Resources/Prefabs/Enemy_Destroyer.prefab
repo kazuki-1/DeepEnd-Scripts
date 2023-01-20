@@ -158,7 +158,8 @@ MonoBehaviour:
   data:
     idInternal: 0
     valueGuidInternal: 
-    WwiseObjectReference: {fileID: 11400000, guid: b5e98bf6027496640ab35e9a5b7949d7, type: 2}
+    WwiseObjectReference: {fileID: 11400000, guid: b5e98bf6027496640ab35e9a5b7949d7,
+      type: 2}
   decodeBank: 0
   loadAsynchronous: 0
   saveDecodedBank: 0
@@ -207,7 +208,8 @@ MonoBehaviour:
   data:
     idInternal: 0
     valueGuidInternal: 
-    WwiseObjectReference: {fileID: 11400000, guid: ba1cbe3b517a94c4da5a590fa8556467, type: 2}
+    WwiseObjectReference: {fileID: 11400000, guid: ba1cbe3b517a94c4da5a590fa8556467,
+      type: 2}
   useCallbacks: 0
   Callbacks: []
   playingId: 0
@@ -247,7 +249,7 @@ GameObject:
   - component: {fileID: 5404038154900743334}
   - component: {fileID: 4719843285682505822}
   m_Layer: 0
-  m_Name: Small Turret
+  m_Name: FrontTurret
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -335,7 +337,7 @@ MonoBehaviour:
   barrel_count: 3
   reload_time: 10
   fire_direction: {x: 0, y: 0, z: 0}
-  angleLimit: 143.25
+  angleLimit: 127.07
   UIPosition: {x: 0, y: 0}
   isReloading: 0
 --- !u!1 &5379681893749174320
@@ -449,6 +451,8 @@ MonoBehaviour:
   movementSpeed: 0
   firingRange: 200
   rammingRange: 71.31
+  debugMode: 0
+  rammingDamage: 10
 --- !u!136 &7503978377367773243
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -491,7 +495,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c80903ae441fd2b44bdbc7a63d40829d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cannonReloadTime: 20
+  cannonReloadTime: 10
   aimedTorpedoReloadTime: 30
   homingTorpedoReloadTime: 45
 --- !u!114 &5294121246957801454
@@ -501,7 +505,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5379681893749174320}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e65c59c00a0827542950ff9a41a1dc2b, type: 3}
   m_Name: 
@@ -552,7 +556,7 @@ GameObject:
   - component: {fileID: 5403790716028493352}
   - component: {fileID: 1588041290419144618}
   m_Layer: 0
-  m_Name: Small Turret
+  m_Name: BackTurret
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -820,7 +824,7 @@ GameObject:
   - component: {fileID: 6867565669132996576}
   - component: {fileID: 3029567806087041980}
   - component: {fileID: 5659790251601593479}
-  m_Layer: 6
+  m_Layer: 9
   m_Name: MinimapObject
   m_TagString: MinimapObject
   m_Icon: {fileID: 0}
@@ -891,7 +895,7 @@ Light:
   m_RenderMode: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 0
   m_RenderingLayerMask: 1
   m_Lightmapping: 4
   m_LightShadowCasterMode: 0
@@ -911,8 +915,8 @@ Halo:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5443694393838363199}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Color:
     serializedVersion: 2
     rgba: 4278321407
-  m_Size: 292.9
+  m_Size: 233.02

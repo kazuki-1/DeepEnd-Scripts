@@ -45,15 +45,18 @@ namespace AimedTorpedoStates
             Transform transform = parent.transform;
             for (int i = 0; i < controller.barrel_count; ++i)
             {
+
+                // Creates the ordinance and initializes its parameters
                 GameObject ord = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/AimedTorpedo"));
                 Vector3 fire_pos = controller.GetFirePosition();
                 fire_pos.x += (float)(-1 * 2.0f + i);
                 fire_pos = Quaternion.Euler(transform.eulerAngles) * fire_pos;
-                //fire_pos = transform.position + fire_pos;
                 ord.transform.position = transform.position + fire_pos;
-                //ord.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
                 ord.GetComponent<AimedTorpedoScript>().direction = controller.GetFireDirection();
                 ord.transform.rotation = Quaternion.LookRotation(controller.GetFireDirection());
+
+                // Sets the source as the parent gameObject so as to not let it collide with itself
+                ord.GetComponent<AimedTorpedoScript>().source = controller.GetComponentInParent<DeepEndEntityController>().gameObject;
 
             }
             Transition((int)AimedTorpedoStateMachine.StateEnum.Reload);

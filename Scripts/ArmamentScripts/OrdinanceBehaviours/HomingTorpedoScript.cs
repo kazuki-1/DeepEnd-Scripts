@@ -72,10 +72,10 @@ public class HomingTorpedoScript : MonoBehaviour
         // Moment after launching from tubes
         if (!hasHitWater)
         {
-            movement = movement * 0.9f;
-            // movement.x *= 0.9f;
-            // movement.z *= 0.9f;
-            movement.y -= 10.0f * Time.deltaTime;
+            movement.x *= .9f;
+            movement.z *= .9f;
+
+            movement.y -= 1.0f * Time.deltaTime;
         }
         // Underwater
         else

@@ -7,7 +7,7 @@ using CannonStates;
 public class CannonStateMachine : StateMachineBase
 {
     [HideInInspector]
-    public int reload_time;
+    public float reload_time;
 
     [HideInInspector]
     public CannonController controller;

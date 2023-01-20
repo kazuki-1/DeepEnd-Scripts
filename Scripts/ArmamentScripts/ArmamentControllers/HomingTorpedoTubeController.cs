@@ -31,7 +31,7 @@ public class HomingTorpedoTubeController : ArmamentBase
         // Check for armamentController;
         ArmamentController armamentController = gameObject.GetComponentInParent<ArmamentController>();
         if (armamentController != null)
-            reload_time = armamentController.homingTorpedoReloadTime;
+            reload_time = armamentController.reloadTimes.homingTorpedo;
         else reload_time = 45;
         (stateMachine as HomingTorpedoStateMachine).reload_time = reload_time;
 

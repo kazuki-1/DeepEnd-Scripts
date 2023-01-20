@@ -4,17 +4,40 @@ using UnityEngine;
 
 public class ArmamentController : MonoBehaviour
 {
-    /*----------------------------------------------------------------------*/
-    /*----------------------------------------------------------------------*/
-    /*---------------------------------Variables----------------------------*/
-    /*----------------------------------------------------------------------*/
-    /*----------------------------------------------------------------------*/
     public enum Armaments
     {
         Cannon,
         AimedTorpedo,
         HomingTorpedo
     }
+
+    [System.Serializable]
+    public class Munitions
+    {
+
+        public int cannons = 0;
+        public int aimedTorpedo = 0;
+        public int homingTorpedo = 0;
+
+    }
+
+    [System.Serializable]
+    public class ArmamentReloadTimes
+    {
+        public float cannon = 10.0f;
+        public float aimedTorpedo = 30.0f;
+        public float homingTorpedo = 45.0f;
+    
+    
+    }
+
+
+    /*----------------------------------------------------------------------*/
+    /*----------------------------------------------------------------------*/
+    /*---------------------------------Variables----------------------------*/
+    /*----------------------------------------------------------------------*/
+    /*----------------------------------------------------------------------*/
+
 
     public class ArmamentList
     {
@@ -28,26 +51,20 @@ public class ArmamentController : MonoBehaviour
     // Start is called before the first frame update
     public List<ArmamentList> armaments { get; private set; } = new List<ArmamentList>();
 
-    public int cannonReloadTime = 10;
-    public int aimedTorpedoReloadTime = 30;
-    public int homingTorpedoReloadTime = 45;
+    //public int cannonReloadTime = 10;
+    //public int aimedTorpedoReloadTime = 30;
+    //public int homingTorpedoReloadTime = 45;
 
 
 
     KeyCode prev_key;
     KeyCode cur_key;
     int key_count;
-    bool prev = false;
+    //bool prev = false;
 
     Armaments current_armament;
-    bool DoubleTapped(KeyCode key)
-    {
-        bool keydown = Input.GetKeyDown(key);
-        prev = keydown;
-        return prev == keydown;
-
-    }
-
+    public Munitions munitions = new Munitions();
+    public ArmamentReloadTimes reloadTimes = new ArmamentReloadTimes();
 
     /*----------------------------------------------------------------------*/
     /*----------------------------------------------------------------------*/
@@ -243,4 +260,8 @@ public class ArmamentController : MonoBehaviour
 
     }
 
+    public virtual bool CheckAmmo()
+    {
+        return true;
+    }
 }

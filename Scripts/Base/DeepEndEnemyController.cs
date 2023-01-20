@@ -12,7 +12,6 @@ public class DeepEndEnemyController : DeepEndEntityController
     void Start()
     {
         
-        
     }
 
     // Update is called once per frame

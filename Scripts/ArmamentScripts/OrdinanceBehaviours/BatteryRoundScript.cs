@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class BatteryRoundScript : MonoBehaviour
 {
+    public GameObject explosionParticlePrefab;
+
+    [HideInInspector]
+    public GameObject source;       // Where the round is fired from
+    Vector3 start_position;
 
     public float Decay(float f, float decayRate)
     {
@@ -27,42 +32,66 @@ public class BatteryRoundScript : MonoBehaviour
 
     private Vector3 velocity;
 
+    private bool hasCollided = false;
+
+    private GameObject explosionParticle;
+
     void Start()
     {
         MainController.ArmamentParameters parameter = GameObject.Find("MainController").GetComponent<MainController>().batteryParameters;
         despawnTimer = parameter.despawnTime;
         velocity = direction.normalized * parameter.speed * Time.deltaTime;
         transform.LookAt(transform.position + direction * 10.0f);
+
+        //explosionParticle = GetComponentInChildren<ParticleSystem>();
+        //if (explosionParticle)
+        //    explosionParticle.Stop();
+
+
     }
 
     // Update is called once per frame
     void Update()
     {
-
-        // Velocity decays
-        //velocity = Decay(velocity, .9999f);
-        velocity.y -= 0.1f * Time.deltaTime;
-
-        transform.position += velocity;
-
+        if (!hasCollided)
+        {
+            // Velocity decays
+            velocity.y -= 0.1f * Time.deltaTime;
+            transform.position += velocity;
+        }
+        else
+            velocity = Vector3.zero;
         // Deletes the object if it has existed for too long
         despawnTimer -= Time.deltaTime;
         if (despawnTimer < 0)
             Object.Destroy(gameObject);
 
+
+        // Also deletes the object if the explosion has finished rendering
+        if (explosionParticle && (!explosionParticle.GetComponent<ParticleSystem>().IsAlive() && hasCollided))
+            Object.Destroy(gameObject);
+
+        
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other == null)
+        // Prevents the round from colliding with the source
+        if (other == null || other.gameObject == source)
             return;
 
 
         if(other.gameObject.GetComponent<DeepEndEntityController>())
         {
-            // TODO  Damage entity
+            
             other.gameObject.GetComponent<DeepEndEntityController>().TakeDamage(MainController.Get().batteryParameters.damage);
-            Object.Destroy(gameObject);
+            explosionParticle = Instantiate<GameObject>(explosionParticlePrefab, transform);
+            explosionParticle.GetComponent<ParticleSystem>().Play();
+            explosionParticle.transform.localScale = new Vector3(10.0f, 10.0f, 10.0f);
+            explosionParticle.transform.localPosition = new Vector3(0.0f, 0.0f, 0.0f);
+            hasCollided = true;
+
+            GetComponentInChildren<MeshRenderer>().enabled = false;
 
         }
 

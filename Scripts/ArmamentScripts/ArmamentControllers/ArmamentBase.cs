@@ -22,7 +22,7 @@ public class ArmamentBase : MonoBehaviour
     public int barrel_count = 3;        // How many ordinances are fired per trigger
 
     [HideInInspector]
-    public int reload_time = 10;        // How long to reload armament
+    public float reload_time = 10;        // How long to reload armament
 
     [HideInInspector]
     public Vector3 fire_direction;      // Ordinance direction
@@ -199,11 +199,12 @@ public class ArmamentBase : MonoBehaviour
         return CheckDirectionToTarget(target.position, angle);
     }
 
-    public bool CheckDirectionToTarget(Vector3 target, float angle = 10.0f)
+    public bool CheckDirectionToTarget(Vector3 target, float angleThreshold = 10.0f)
     {
         Vector3 dir = target- transform.position;
         dir.Normalize();
-        if (Vector3.Angle(transform.forward, dir) > angle)
+        float angle = Vector3.Angle(transform.forward, dir);
+        if (Vector3.Angle(transform.forward, dir) > angleThreshold)
             return false;
         return true;
     }

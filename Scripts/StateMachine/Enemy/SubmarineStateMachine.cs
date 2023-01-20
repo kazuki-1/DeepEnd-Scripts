@@ -28,7 +28,8 @@ public class SubmarineStateMachine : StateMachineBase
         states.Add((int)StateEnum.Sink, new SubmarineState_Sunk());
         states.Add((int)StateEnum.Retreat, new SubmarineState_Retreat());
 
-
+        foreach (var state in states)
+            (state.Value as SubmarineState_Base).controller = parent.GetComponent<EnemySubmarineController>();
 
     }
 }

@@ -58,6 +58,10 @@ public class MainController : MonoBehaviour
 
     public Vector2 waveformDimensions;
 
+    public int radarCooldownTime;
+
+    public float radarEffectTime;
+
     private Timer timer;    // Timer for vector simulation
 
     /*--------------------------------------------------------------------------------*/
@@ -92,7 +96,6 @@ public class MainController : MonoBehaviour
         float[] data = new float[clip.samples * clip.channels];
         clip.GetData(data, 0);
         
-
 
         double dataPerPixel = 2.0f / height;          // The waveform is limited to -1.0f ~ 1.0f. This will dictate the height of the samples
         int samplePerPixel = (int)(data.Length / width);

@@ -60,6 +60,7 @@ namespace CannonStates
                 ord.transform.position = transform.position + fire_pos;
                 //ord.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
                 ord.GetComponent<BatteryRoundScript>().direction = controller.GetFireDirection();
+                ord.GetComponent<BatteryRoundScript>().source = parent.GetComponentInParent<DeepEndEntityController>().gameObject;
                 //ord.GetComponent<BatteryRoundScript>().Initialize() ;
 
             }

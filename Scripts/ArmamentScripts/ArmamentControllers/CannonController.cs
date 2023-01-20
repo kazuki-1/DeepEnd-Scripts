@@ -17,7 +17,7 @@ public class CannonController : ArmamentBase
         // Checks the gameObject if there is a ArmamentController
         ArmamentController armamentController = gameObject.GetComponentInParent<ArmamentController>();
         if (armamentController != null)
-            reload_time = armamentController.cannonReloadTime;
+            reload_time = (int)armamentController.reloadTimes.cannon;
         (stateMachine as CannonStateMachine).reload_time = reload_time;
 
         starting_position = transform.position;

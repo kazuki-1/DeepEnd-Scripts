@@ -8,7 +8,7 @@ public class Timer
 
     public float time;     // Seconds
     private float remaining_time;
-
+    private int timerPasses = 0;
 
     /// <summary>
     /// 
@@ -17,14 +17,29 @@ public class Timer
     public Timer(int tm) 
     {
         time = tm;
-        remaining_time = time;
+        //remaining_time = time;
+        remaining_time = 0;
+    }
+
+    public Timer()
+    {
+        remaining_time = time = 0.0f;
+
+    }
+
+    public Timer(float tm)
+    {
+        time = tm;
+        //remaining_time = time;
+        remaining_time = 0;
     }
 
     public void Execute()
     {
-        
-        remaining_time -= Time.deltaTime;
-        remaining_time = Mathf.Max(remaining_time, 0.0f);
+
+        remaining_time += Time.deltaTime;
+        if(time > 0.0f)
+            remaining_time = Mathf.Min(remaining_time, time);
     }
 
     /// <summary>
@@ -37,22 +52,56 @@ public class Timer
     }
     public float GetRemainingTime()
     {
-        return remaining_time;
+        //return remaining_time;
+        return time - remaining_time;
+    }
+    /// <summary>
+    /// Resets the timer and set the trigger time to the given parameter
+    /// </summary>
+    /// <param name="tm"></param>
+    public void ResetTo(float tm)
+    {
+        time = tm;
+        remaining_time = 0.0f;
     }
     public void Reset()
     {
-        remaining_time = time;
+        // remaining_time = time;
+        remaining_time = 0;
     }
 
     // returns true if timer is done
     public bool Done()
     {
-        return remaining_time == 0.0f;
+        //return remaining_time == 0.0f;
+        return remaining_time >= time ;
     }
 
+    /// <summary>
+    /// Returns true if timer has passed the given time
+    /// </summary>
     public bool OnPass(float tm)
     {
-        return time - remaining_time > tm;
+        // return time - remaining_time > tm;
+        return remaining_time > tm;
+    }
+
+    /// <summary>
+    /// Returns true everytime the timer passes the given time
+    /// </summary>
+    /// <param name="tm"></param>
+    /// <returns></returns>
+    public bool OnEveryPass(float tm)
+    {
+        bool res = false;
+        float interval = tm * timerPasses;
+        if(remaining_time > interval)
+        {
+            res = true;
+            timerPasses = (int)(remaining_time / tm) + 1;
+        }
+        return res;
+
     }
 
 }
