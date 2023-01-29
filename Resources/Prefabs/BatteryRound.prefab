@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4099343312010656720}
   - component: {fileID: 3538043208000806313}
   - component: {fileID: 4774459732055908471}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: MinimapObject
   m_TagString: MinimapObject
   m_Icon: {fileID: 0}
@@ -186,6 +186,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   explosionParticlePrefab: {fileID: 1828176872806910, guid: 7a9cf7a4b3189fc42b474cc8f3b9f82e,
     type: 3}
+  explosionSoundEvent:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 0}
+  source: {fileID: 0}
   direction: {x: 0, y: 0, z: 0}
   maximum_distance: 1000
 --- !u!1001 &5517793886142859333

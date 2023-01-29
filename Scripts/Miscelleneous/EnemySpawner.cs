@@ -4,12 +4,30 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
+    [System.Serializable]
+    public class Entity
+    {
+        public GameObject entityPrefab;
+        public int spawnRatio = 5;
+    }
+
+    public enum EnemyType
+    {
+        Destroyer, 
+        Submarine
+    };
+
+
+
     public float radius = 1000;
 
     [Tooltip("How many vertices does the circle have")]
     public int vertexCount= 50;
 
-    public List<GameObject> enemyPrefabs;
+    public List<Entity> entities = new List<Entity>();
+    public int enemyCount = 30;
+
+
 
 
     List<Vector3> spawnPoints = new List<Vector3>();
@@ -51,7 +69,7 @@ public class EnemySpawner : MonoBehaviour
 
     void Spawn(int itr)
     {
-        GameObject obj = Instantiate<GameObject>(enemyPrefabs[itr], spawnPoints[Random.Range(0, spawnPoints.Count)], Quaternion.identity);
+        GameObject obj = Instantiate<GameObject>(entities[itr].entityPrefab, spawnPoints[Random.Range(0, spawnPoints.Count)], Quaternion.identity);
     }
 
     private void OnDrawGizmos()

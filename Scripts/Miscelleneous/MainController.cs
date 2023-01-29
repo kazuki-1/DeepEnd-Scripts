@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Stats))]
 [Tooltip("Contains global constants" +
     "Also contains miscellenous functions")]
 public class MainController : MonoBehaviour
@@ -64,6 +65,13 @@ public class MainController : MonoBehaviour
 
     private Timer timer;    // Timer for vector simulation
 
+    public AK.Wwise.Event pauseAllEvents;
+    public AK.Wwise.Event resumeAllEvents;
+
+
+    bool isPaused = false;
+
+
     /*--------------------------------------------------------------------------------*/
     /*--------------------------------------------------------------------------------*/
     /*------------------------------------Functions-----------------------------------*/
@@ -79,6 +87,11 @@ public class MainController : MonoBehaviour
     static public MainController Get()
     {
         return GameObject.Find("MainController").GetComponent<MainController>();
+    }
+
+    public Stats GetStats()
+    {
+        return GetComponent<Stats>();
     }
 
     /// <summary>
@@ -156,22 +169,22 @@ public class MainController : MonoBehaviour
 
     }
 
-    public void MuteAllExcept(GameObject target)
-    {
-        foreach (GameObject obj in audioSources)
-        {
-            obj.GetComponent<AudioSource>().mute = false;
-            if (obj == target)
-                continue;
-            obj.GetComponent<AudioSource>().mute = true;
-        }
-    }
+    //public void MuteAllExcept(GameObject target)
+    //{
+    //    foreach (GameObject obj in audioSources)
+    //    {
+    //        obj.GetComponent<AudioSource>().mute = false;
+    //        if (obj == target)
+    //            continue;
+    //        obj.GetComponent<AudioSource>().mute = true;
+    //    }
+    //}
 
-    public void UnmuteAll()
-    {
-        foreach (GameObject obj in audioSources)
-            obj.GetComponent<AudioSource>().mute = false;
-    }
+    //public void UnmuteAll()
+    //{
+    //    foreach (GameObject obj in audioSources)
+    //        obj.GetComponent<AudioSource>().mute = false;
+    //}
 
     /// <summary>
     /// Perform calculation to give a point based on a simulation
@@ -188,5 +201,31 @@ public class MainController : MonoBehaviour
         return start + velocity * time;
 
     }
+
+    public void PauseAll()
+    {
+        // if (isPaused)
+        //     return;
+        //pauseAllEvents.Post(gameObject);
+
+        foreach (GameObject obj in GameObject.FindGameObjectsWithTag("AudioSource"))
+            obj.GetComponent<AudioInterface>().Pause();
+        isPaused = true;
+
+    }
+
+    public void ResumeAll()
+    {
+        if (!isPaused)
+            return;
+        // resumeAllEvents.Post(gameObject);
+
+        foreach (GameObject obj in GameObject.FindGameObjectsWithTag("AudioSource"))
+            obj.GetComponent<AudioInterface>().Post();
+        isPaused = false;
+
+    }
+
+
 
 }

@@ -382,7 +382,7 @@ MonoBehaviour:
     ParentPath: SoundBanks\Default Work Unit
     guid: d31733c48492ce49a723b8df8fb4cd52
     GuidInternal: 
-    m_lastTime: -8585313921926141465
+    m_lastTime: -8585266513765936885
     List:
     - name: DeepEnd
       guid: 3f29a0137f38f64cba1aaec2e79fd41c
@@ -410,7 +410,7 @@ MonoBehaviour:
     ParentPath: Events\Default Work Unit
     guid: 945a456216895942b143b23e9e10772e
     GuidInternal: 
-    m_lastTime: -8585313921925981347
+    m_lastTime: -8585266513765308650
     List:
     - name: ActivateTrigger
       guid: e27f6b5d88748449b134372e1f889e73
@@ -427,8 +427,102 @@ MonoBehaviour:
         guid: e27f6b5d88748449b134372e1f889e73
       Path: Events\Default Work Unit\ActivateTrigger
       maxAttenuation: 0
-      maxDuration: 0
-      minDuration: 0
+      maxDuration: -1
+      minDuration: -1
+    - name: PauseAll
+      guid: afce2bfea247eb439c0aef3e20aee179
+      id: 4091047182
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 945a456216895942b143b23e9e10772e
+      - ElementName: PauseAll
+        ObjectType: 3
+        guid: afce2bfea247eb439c0aef3e20aee179
+      Path: Events\Default Work Unit\PauseAll
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
+    - name: PauseAllBut
+      guid: 8de510345af576479eb1d66de98066a1
+      id: 757452995
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 945a456216895942b143b23e9e10772e
+      - ElementName: PauseAllBut
+        ObjectType: 3
+        guid: 8de510345af576479eb1d66de98066a1
+      Path: Events\Default Work Unit\PauseAllBut
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
+    - name: PauseShipSound
+      guid: 6708ddd5a373c84aaae07ec949c753ae
+      id: 2495666524
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 945a456216895942b143b23e9e10772e
+      - ElementName: ShipSounds
+        ObjectType: 4
+        guid: 9c5b70ddd768494485615570c43eab99
+      - ElementName: PauseShipSound
+        ObjectType: 3
+        guid: 6708ddd5a373c84aaae07ec949c753ae
+      Path: Events\Default Work Unit\ShipSounds\PauseShipSound
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
+    - name: PauseSonar
+      guid: d60523294403d14d81815b4513d71787
+      id: 2666579542
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 945a456216895942b143b23e9e10772e
+      - ElementName: SFX
+        ObjectType: 4
+        guid: 9d86c88d575c09419c3ea8b2e5ce514c
+      - ElementName: PauseSonar
+        ObjectType: 3
+        guid: d60523294403d14d81815b4513d71787
+      Path: Events\Default Work Unit\SFX\PauseSonar
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
+    - name: PauseSubSound
+      guid: c233fb0c0532c34caa1648a0d097c019
+      id: 870539110
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 945a456216895942b143b23e9e10772e
+      - ElementName: ShipSounds
+        ObjectType: 4
+        guid: 9c5b70ddd768494485615570c43eab99
+      - ElementName: PauseSubSound
+        ObjectType: 3
+        guid: c233fb0c0532c34caa1648a0d097c019
+      Path: Events\Default Work Unit\ShipSounds\PauseSubSound
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
     - name: PlayFireSound
       guid: 3485761fb9c13b46806c78cc9ce24399
       id: 3204389624
@@ -439,13 +533,16 @@ MonoBehaviour:
       - ElementName: Default Work Unit
         ObjectType: 12
         guid: 945a456216895942b143b23e9e10772e
+      - ElementName: SFX
+        ObjectType: 4
+        guid: 9d86c88d575c09419c3ea8b2e5ce514c
       - ElementName: PlayFireSound
         ObjectType: 3
         guid: 3485761fb9c13b46806c78cc9ce24399
-      Path: Events\Default Work Unit\PlayFireSound
-      maxAttenuation: 1000
-      maxDuration: 4.173084
-      minDuration: 4.173084
+      Path: Events\Default Work Unit\SFX\PlayFireSound
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
     - name: PlayShipSound
       guid: a23c61348ef0364e9c19f131570eb62d
       id: 1242247530
@@ -456,16 +553,19 @@ MonoBehaviour:
       - ElementName: Default Work Unit
         ObjectType: 12
         guid: 945a456216895942b143b23e9e10772e
+      - ElementName: ShipSounds
+        ObjectType: 4
+        guid: 9c5b70ddd768494485615570c43eab99
       - ElementName: PlayShipSound
         ObjectType: 3
         guid: a23c61348ef0364e9c19f131570eb62d
-      Path: Events\Default Work Unit\PlayShipSound
-      maxAttenuation: 1000
-      maxDuration: 1.634626
-      minDuration: 1.634626
-    - name: PlaySound
-      guid: 86931401832c114ba81ab0579162ac00
-      id: 2144309188
+      Path: Events\Default Work Unit\ShipSounds\PlayShipSound
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
+    - name: PlaySonar
+      guid: 6a6c053b07a82740949da3486ca34b63
+      id: 2526104420
       PathAndIcons:
       - ElementName: Events
         ObjectType: 5
@@ -473,13 +573,107 @@ MonoBehaviour:
       - ElementName: Default Work Unit
         ObjectType: 12
         guid: 945a456216895942b143b23e9e10772e
-      - ElementName: PlaySound
+      - ElementName: SFX
+        ObjectType: 4
+        guid: 9d86c88d575c09419c3ea8b2e5ce514c
+      - ElementName: PlaySonar
         ObjectType: 3
-        guid: 86931401832c114ba81ab0579162ac00
-      Path: Events\Default Work Unit\PlaySound
-      maxAttenuation: 1000
-      maxDuration: 97.85937
-      minDuration: 97.85937
+        guid: 6a6c053b07a82740949da3486ca34b63
+      Path: Events\Default Work Unit\SFX\PlaySonar
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
+    - name: PlaySubSound
+      guid: e37704658018bb4cb6dc45cdb29feffe
+      id: 3781396996
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 945a456216895942b143b23e9e10772e
+      - ElementName: ShipSounds
+        ObjectType: 4
+        guid: 9c5b70ddd768494485615570c43eab99
+      - ElementName: PlaySubSound
+        ObjectType: 3
+        guid: e37704658018bb4cb6dc45cdb29feffe
+      Path: Events\Default Work Unit\ShipSounds\PlaySubSound
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
+    - name: PlayTorpedoHitSound
+      guid: 4d5fb3d385aa134e8aae2e5a58f97f1f
+      id: 3018773612
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 945a456216895942b143b23e9e10772e
+      - ElementName: SFX
+        ObjectType: 4
+        guid: 9d86c88d575c09419c3ea8b2e5ce514c
+      - ElementName: PlayTorpedoHitSound
+        ObjectType: 3
+        guid: 4d5fb3d385aa134e8aae2e5a58f97f1f
+      Path: Events\Default Work Unit\SFX\PlayTorpedoHitSound
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
+    - name: ResumeAll
+      guid: 4c40e0d045eec6459311f2f17edcb700
+      id: 3240900869
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 945a456216895942b143b23e9e10772e
+      - ElementName: ResumeAll
+        ObjectType: 3
+        guid: 4c40e0d045eec6459311f2f17edcb700
+      Path: Events\Default Work Unit\ResumeAll
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
+    - name: SFX
+      guid: 9d86c88d575c09419c3ea8b2e5ce514c
+      id: 393239870
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 945a456216895942b143b23e9e10772e
+      - ElementName: SFX
+        ObjectType: 4
+        guid: 9d86c88d575c09419c3ea8b2e5ce514c
+      Path: Events\Default Work Unit\SFX
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
+    - name: ShipSounds
+      guid: 9c5b70ddd768494485615570c43eab99
+      id: 2631197575
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 945a456216895942b143b23e9e10772e
+      - ElementName: ShipSounds
+        ObjectType: 4
+        guid: 9c5b70ddd768494485615570c43eab99
+      Path: Events\Default Work Unit\ShipSounds
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
   RtpcWwu:
   - PhysicalPath: Game Parameters\Default Work Unit.wwu
     PathAndIcons:
@@ -550,9 +744,9 @@ MonoBehaviour:
         ObjectType: 14
         guid: 21fc4bc26d43c8449d6a56fc05cde4e6
       Path: Triggers\Default Work Unit\PlaySound
-  ExpandedFileSystemItemIds: 0100000002000000030000000400000005000000060000000e0000000f00000010000000
-  ExpandedWaapiItemIds: 0100000002000000030000000400000005000000060000000d0000000e0000000f00000010000000
-  AutoSyncSelection: 0
+  ExpandedFileSystemItemIds: 010000000200000003000000040000000500000006000000070000000e0000000f00000010000000
+  ExpandedWaapiItemIds: 010000000200000003000000040000000500000006000000070000000b0000000c0000000d0000000e0000000f00000010000000
+  AutoSyncSelection: 1
   autoPopulateEnabled: 1
   currentDataSource: 0
   CurrentPluginConfig: 

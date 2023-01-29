@@ -9,7 +9,10 @@ public class AudioInterface : MonoBehaviour
     [SerializeField]
     Texture2D waveformTexture;
 
-    //RenderTexture renderTexture;
+    public AK.Wwise.Event SFXEvent;
+    public AK.Wwise.Event pauseEvent;
+
+    bool isPosted = false;
 
     private void Awake()
     {
@@ -17,7 +20,7 @@ public class AudioInterface : MonoBehaviour
     }
     void Start()
     {
-        
+        //Post();
     }
 
     // Update is called once per frame
@@ -29,6 +32,25 @@ public class AudioInterface : MonoBehaviour
     public Texture2D GetTexture()
     {
         return waveformTexture;
+    }
+
+    public void Post()
+    {
+        if (isPosted)
+            return;
+        SFXEvent.Post(GetComponentInParent<DeepEndEntityController>().gameObject);
+        isPosted = true;
+
+    }   
+
+    public void Pause()
+    {
+        if (!isPosted)
+            return;
+        pauseEvent.Post(GetComponentInParent<DeepEndEntityController>().gameObject);
+        isPosted = false;
+
+
     }
 
     //public RenderTexture GetRenderTexture()

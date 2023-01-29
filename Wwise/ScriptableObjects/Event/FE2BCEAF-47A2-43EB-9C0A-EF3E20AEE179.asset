@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39f9c7999316dcb4186217bba301095c, type: 3}
+  m_Name: FE2BCEAF-47A2-43EB-9C0A-EF3E20AEE179
+  m_EditorClassIdentifier: 
+  objectName: PauseAll
+  id: 4091047182
+  guid: FE2BCEAF-47A2-43EB-9C0A-EF3E20AEE179

@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 4864212383819139193}
   - component: {fileID: 6563688337305333684}
   - component: {fileID: 5021209335473395508}
+  - component: {fileID: 2122909462014184931}
   m_Layer: 0
   m_Name: AudioListener
   m_TagString: Untagged
@@ -120,6 +121,40 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 2574382381021306283}
   cameraTransform: {fileID: 0}
+--- !u!114 &2122909462014184931
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1649742960}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e37c5adf2d2d1949841f074bcf3dee1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  triggerList: 
+  useOtherObject: 0
+  actionOnEventType: 0
+  curveInterpolation: 4
+  enableActionOnEvent: 0
+  data:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 0}
+  useCallbacks: 0
+  Callbacks: []
+  playingId: 0
+  soundEmitterObject: {fileID: 0}
+  transitionDuration: 0
+  eventIdInternal: 0
+  valueGuidInternal: 
+  m_callbackDataInternal: {fileID: 0}
+  MultiPositionType: 1
+  multiPositionTypeLabel: 0
+  attenuationSphereColor: {r: 1, g: 0, b: 0, a: 0.1}
+  LargeModePositions: []
+  multiPositionArray: []
 --- !u!1001 &2569976118566406909
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -369,7 +404,7 @@ PrefabInstance:
     - target: {fileID: 4250462972854352333, guid: 74d0740f4abc7e54fab50d33af2582da,
         type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 4672266420480553394, guid: 74d0740f4abc7e54fab50d33af2582da,
         type: 3}
@@ -480,6 +515,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_CullingMask.m_Bits
       value: 128
+      objectReference: {fileID: 0}
+    - target: {fileID: 7193782818721896413, guid: 74d0740f4abc7e54fab50d33af2582da,
+        type: 3}
+      propertyPath: healthPoints
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 7240957935404918475, guid: 74d0740f4abc7e54fab50d33af2582da,
         type: 3}

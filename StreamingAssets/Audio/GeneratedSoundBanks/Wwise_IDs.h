@@ -14,9 +14,17 @@ namespace AK
     namespace EVENTS
     {
         static const AkUniqueID ACTIVATETRIGGER = 2319207134U;
+        static const AkUniqueID PAUSEALL = 4091047182U;
+        static const AkUniqueID PAUSEALLBUT = 757452995U;
+        static const AkUniqueID PAUSESHIPSOUND = 2495666524U;
+        static const AkUniqueID PAUSESONAR = 2666579542U;
+        static const AkUniqueID PAUSESUBSOUND = 870539110U;
         static const AkUniqueID PLAYFIRESOUND = 3204389624U;
         static const AkUniqueID PLAYSHIPSOUND = 1242247530U;
-        static const AkUniqueID PLAYSOUND = 2144309188U;
+        static const AkUniqueID PLAYSONAR = 2526104420U;
+        static const AkUniqueID PLAYSUBSOUND = 3781396996U;
+        static const AkUniqueID PLAYTORPEDOHITSOUND = 3018773612U;
+        static const AkUniqueID RESUMEALL = 3240900869U;
     } // namespace EVENTS
 
     namespace TRIGGERS
