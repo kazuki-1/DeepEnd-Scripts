@@ -427,8 +427,8 @@ MonoBehaviour:
         guid: e27f6b5d88748449b134372e1f889e73
       Path: Events\Default Work Unit\ActivateTrigger
       maxAttenuation: 0
-      maxDuration: -1
-      minDuration: -1
+      maxDuration: 0
+      minDuration: 0
     - name: PauseAll
       guid: afce2bfea247eb439c0aef3e20aee179
       id: 4091047182
@@ -444,8 +444,8 @@ MonoBehaviour:
         guid: afce2bfea247eb439c0aef3e20aee179
       Path: Events\Default Work Unit\PauseAll
       maxAttenuation: 0
-      maxDuration: -1
-      minDuration: -1
+      maxDuration: 0
+      minDuration: 0
     - name: PauseAllBut
       guid: 8de510345af576479eb1d66de98066a1
       id: 757452995
@@ -461,8 +461,8 @@ MonoBehaviour:
         guid: 8de510345af576479eb1d66de98066a1
       Path: Events\Default Work Unit\PauseAllBut
       maxAttenuation: 0
-      maxDuration: -1
-      minDuration: -1
+      maxDuration: 0
+      minDuration: 0
     - name: PauseShipSound
       guid: 6708ddd5a373c84aaae07ec949c753ae
       id: 2495666524
@@ -481,8 +481,8 @@ MonoBehaviour:
         guid: 6708ddd5a373c84aaae07ec949c753ae
       Path: Events\Default Work Unit\ShipSounds\PauseShipSound
       maxAttenuation: 0
-      maxDuration: -1
-      minDuration: -1
+      maxDuration: 0
+      minDuration: 0
     - name: PauseSonar
       guid: d60523294403d14d81815b4513d71787
       id: 2666579542
@@ -501,8 +501,8 @@ MonoBehaviour:
         guid: d60523294403d14d81815b4513d71787
       Path: Events\Default Work Unit\SFX\PauseSonar
       maxAttenuation: 0
-      maxDuration: -1
-      minDuration: -1
+      maxDuration: 0
+      minDuration: 0
     - name: PauseSubSound
       guid: c233fb0c0532c34caa1648a0d097c019
       id: 870539110
@@ -521,8 +521,8 @@ MonoBehaviour:
         guid: c233fb0c0532c34caa1648a0d097c019
       Path: Events\Default Work Unit\ShipSounds\PauseSubSound
       maxAttenuation: 0
-      maxDuration: -1
-      minDuration: -1
+      maxDuration: 0
+      minDuration: 0
     - name: PlayFireSound
       guid: 3485761fb9c13b46806c78cc9ce24399
       id: 3204389624
@@ -540,9 +540,9 @@ MonoBehaviour:
         ObjectType: 3
         guid: 3485761fb9c13b46806c78cc9ce24399
       Path: Events\Default Work Unit\SFX\PlayFireSound
-      maxAttenuation: 0
-      maxDuration: -1
-      minDuration: -1
+      maxAttenuation: 1000
+      maxDuration: 4.173084
+      minDuration: 4.173084
     - name: PlayShipSound
       guid: a23c61348ef0364e9c19f131570eb62d
       id: 1242247530
@@ -560,7 +560,7 @@ MonoBehaviour:
         ObjectType: 3
         guid: a23c61348ef0364e9c19f131570eb62d
       Path: Events\Default Work Unit\ShipSounds\PlayShipSound
-      maxAttenuation: 0
+      maxAttenuation: 1000
       maxDuration: -1
       minDuration: -1
     - name: PlaySonar
@@ -580,7 +580,7 @@ MonoBehaviour:
         ObjectType: 3
         guid: 6a6c053b07a82740949da3486ca34b63
       Path: Events\Default Work Unit\SFX\PlaySonar
-      maxAttenuation: 0
+      maxAttenuation: 1000
       maxDuration: -1
       minDuration: -1
     - name: PlaySubSound
@@ -600,7 +600,7 @@ MonoBehaviour:
         ObjectType: 3
         guid: e37704658018bb4cb6dc45cdb29feffe
       Path: Events\Default Work Unit\ShipSounds\PlaySubSound
-      maxAttenuation: 0
+      maxAttenuation: 1000
       maxDuration: -1
       minDuration: -1
     - name: PlayTorpedoHitSound
@@ -620,9 +620,9 @@ MonoBehaviour:
         ObjectType: 3
         guid: 4d5fb3d385aa134e8aae2e5a58f97f1f
       Path: Events\Default Work Unit\SFX\PlayTorpedoHitSound
-      maxAttenuation: 0
-      maxDuration: -1
-      minDuration: -1
+      maxAttenuation: 1000
+      maxDuration: 3.245193
+      minDuration: 3.245193
     - name: ResumeAll
       guid: 4c40e0d045eec6459311f2f17edcb700
       id: 3240900869
@@ -638,8 +638,8 @@ MonoBehaviour:
         guid: 4c40e0d045eec6459311f2f17edcb700
       Path: Events\Default Work Unit\ResumeAll
       maxAttenuation: 0
-      maxDuration: -1
-      minDuration: -1
+      maxDuration: 0
+      minDuration: 0
     - name: SFX
       guid: 9d86c88d575c09419c3ea8b2e5ce514c
       id: 393239870
@@ -744,9 +744,9 @@ MonoBehaviour:
         ObjectType: 14
         guid: 21fc4bc26d43c8449d6a56fc05cde4e6
       Path: Triggers\Default Work Unit\PlaySound
-  ExpandedFileSystemItemIds: 010000000200000003000000040000000500000006000000070000000e0000000f00000010000000
-  ExpandedWaapiItemIds: 010000000200000003000000040000000500000006000000070000000b0000000c0000000d0000000e0000000f00000010000000
-  AutoSyncSelection: 1
+  ExpandedFileSystemItemIds: 
+  ExpandedWaapiItemIds: 05000000060000000b000000
+  AutoSyncSelection: 0
   autoPopulateEnabled: 1
   currentDataSource: 0
   CurrentPluginConfig: 

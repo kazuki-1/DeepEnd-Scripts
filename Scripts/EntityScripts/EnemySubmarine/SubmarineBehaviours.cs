@@ -59,7 +59,7 @@ namespace SubmarineStates
             Vector3 direction = distance.normalized;
 
             Quaternion rot = Quaternion.FromToRotation(Vector3.forward, direction);
-            controller.transform.rotation = Quaternion.Slerp(controller.transform.rotation, rot, 0.1f * Time.deltaTime);
+            controller.transform.rotation = Quaternion.Slerp(controller.transform.rotation, rot, 0.2f * Time.deltaTime);
             Vector3 pos = controller.transform.position;
             pos += (controller.transform.forward * cur_speed);
             controller.transform.position = pos;
@@ -71,6 +71,9 @@ namespace SubmarineStates
 
             if (distance.magnitude < controller.attackRange)
                 Transition((int)SubmarineStateMachine.StateEnum.PursuitAndAttack);
+
+            if (!controller.IsAlive())
+                Transition((int)SubmarineStateMachine.StateEnum.Sink);
 
 
         }
@@ -113,11 +116,11 @@ namespace SubmarineStates
             // Slowly surface the sub
             if (parent.transform.position.y > surfacePosition.y)
             {
-                velocity = Vector3.Lerp(velocity, Vector3.zero, 0.5f * Time.deltaTime);
+                velocity = Vector3.Lerp(velocity, Vector3.zero, Time.deltaTime * 2);
                 if (timer == null)
                     timer = new Timer(controller.surfaceTime);
             }
-            else
+            else if (velocity.magnitude < 5.0f)
             {
                    velocity += diff * (Time.deltaTime / controller.surfaceTime);
             }
@@ -131,11 +134,15 @@ namespace SubmarineStates
 
             if (timer != null && timer.Done())
                 Transition((int)SubmarineStateMachine.StateEnum.Submerge);
+
+            if (!controller.IsAlive())
+                Transition((int)SubmarineStateMachine.StateEnum.Sink);
         }
 
         public override void End(GameObject parent)
         {
             timer = null;
+            submergedPosition = surfacePosition = velocity = Vector3.zero;
         }
 
 
@@ -167,9 +174,9 @@ namespace SubmarineStates
             Vector3 diff = submergedPosition - surfacePosition;
 
             // Slows the velocity when lowered to needed depth
-            if (parent.transform.position.y < submergedPosition.y)
+            if (parent.transform.position.y < -controller.submergeHeight)
             {
-                velocity = Vector3.Lerp(velocity, Vector3.zero, 0.5f * Time.deltaTime);
+                velocity = Vector3.Lerp(velocity, Vector3.zero, Time.deltaTime);
                 if (velocity.magnitude < 0.1f)
                     Transition((int)SubmarineStateMachine.StateEnum.Approach);
 
@@ -181,14 +188,17 @@ namespace SubmarineStates
             parent.transform.position += velocity * Time.deltaTime;
 
             // Transitions when velocity stops
+            if (velocity.magnitude < 0.01f)
+                Transition((int)SubmarineStateMachine.StateEnum.Approach);
 
-
-
+            if (!controller.IsAlive())
+                Transition((int)SubmarineStateMachine.StateEnum.Sink);
         }
 
         public override void End(GameObject parent)
         {
             controller.BeginTimer();
+            submergedPosition = surfacePosition = velocity = Vector3.zero;
         }
 
 
@@ -227,17 +237,21 @@ namespace SubmarineStates
             if (distance.magnitude > controller.minimumRange)
             {
                 Quaternion rot = Quaternion.FromToRotation(Vector3.forward, direction);
-                controller.transform.rotation = Quaternion.Slerp(controller.transform.rotation, rot, 0.1f * Time.deltaTime);
+                controller.transform.rotation = Quaternion.Slerp(controller.transform.rotation, rot, 0.2f * Time.deltaTime);
                 controller.transform.position += controller.transform.forward * cur_speed * .25f;
             }
             controller.GetComponent<ArmamentController>().FireArmaments();
 
             // Transitional conditions
+            if (!controller.IsAlive())
+                Transition((int)SubmarineStateMachine.StateEnum.Sink);
+
             if (controller.SubmergeTimerDone())
                 Transition((int)SubmarineStateMachine.StateEnum.Surface);
 
             if (!controller.GetComponent<SubmarineArmamentController>().CheckAmmo())
                 Transition((int)SubmarineStateMachine.StateEnum.Retreat);
+
         }
 
         public override void End(GameObject parent)
@@ -254,7 +268,8 @@ namespace SubmarineStates
 
         public override void Initialize(GameObject parent)
         {
-
+            MainController.Get().GetStats().LogSunk(EnemySpawner.EnemyType.Submarine);
+            controller.Destroy();
         }
 
         public override void Execute(GameObject parent)
@@ -292,6 +307,9 @@ namespace SubmarineStates
 
             controller.transform.rotation = Quaternion.Slerp(controller.transform.rotation, rot, 0.1f * Time.deltaTime);
             parent.transform.position += parent.transform.forward * 10.0f * Time.deltaTime;
+
+            if (!controller.IsAlive())
+                Transition((int)SubmarineStateMachine.StateEnum.Sink);
 
             if ((parent.transform.position - player.transform.position).magnitude > 2500.0f)
                 End(parent);

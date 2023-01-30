@@ -61,7 +61,9 @@ public class MainController : MonoBehaviour
 
     public int radarCooldownTime;
 
-    public float radarEffectTime;
+    //public float radarEffectTime;
+
+    public float stageTime = 240.0f;        // How long for the stage to last
 
     private Timer timer;    // Timer for vector simulation
 
@@ -197,12 +199,11 @@ public class MainController : MonoBehaviour
     /// <returns></returns>
     public Vector3 SimulateVectorMovement(Vector3 start, Vector3 velocity, float time)
     {
-        float deltaTime = Time.deltaTime;
         return start + velocity * time;
 
     }
 
-    public void PauseAll()
+    public void PauseAllAudio()
     {
         // if (isPaused)
         //     return;
@@ -214,7 +215,7 @@ public class MainController : MonoBehaviour
 
     }
 
-    public void ResumeAll()
+    public void ResumeAllAudio()
     {
         if (!isPaused)
             return;

@@ -158,8 +158,7 @@ MonoBehaviour:
   data:
     idInternal: 0
     valueGuidInternal: 
-    WwiseObjectReference: {fileID: 11400000, guid: b5e98bf6027496640ab35e9a5b7949d7,
-      type: 2}
+    WwiseObjectReference: {fileID: 11400000, guid: b5e98bf6027496640ab35e9a5b7949d7, type: 2}
   decodeBank: 0
   loadAsynchronous: 0
   saveDecodedBank: 0
@@ -208,8 +207,7 @@ MonoBehaviour:
   data:
     idInternal: 0
     valueGuidInternal: 
-    WwiseObjectReference: {fileID: 11400000, guid: ba1cbe3b517a94c4da5a590fa8556467,
-      type: 2}
+    WwiseObjectReference: {fileID: 11400000, guid: ba1cbe3b517a94c4da5a590fa8556467, type: 2}
   useCallbacks: 0
   Callbacks: []
   playingId: 0
@@ -239,14 +237,11 @@ MonoBehaviour:
   SFXEvent:
     idInternal: 0
     valueGuidInternal: 
-    WwiseObjectReference: {fileID: 11400000, guid: ba1cbe3b517a94c4da5a590fa8556467,
-      type: 2}
+    WwiseObjectReference: {fileID: 11400000, guid: ba1cbe3b517a94c4da5a590fa8556467, type: 2}
   pauseEvent:
     idInternal: 0
     valueGuidInternal: 
-    WwiseObjectReference: {fileID: 11400000, guid: 5122e56f6e6521644848d362f27b4d5e,
-      type: 2}
-  isPosted: 0
+    WwiseObjectReference: {fileID: 11400000, guid: 5122e56f6e6521644848d362f27b4d5e, type: 2}
 --- !u!1 &5379572303881300872
 GameObject:
   m_ObjectHideFlags: 0
@@ -840,7 +835,7 @@ GameObject:
   - component: {fileID: 6867565669132996576}
   - component: {fileID: 3029567806087041980}
   - component: {fileID: 5659790251601593479}
-  m_Layer: 9
+  m_Layer: 8
   m_Name: MinimapObject
   m_TagString: MinimapObject
   m_Icon: {fileID: 0}

@@ -5,7 +5,10 @@ using UnityEngine.SceneManagement;
 public class DeepEndPlayerController : DeepEndEntityController
 {
 
-    
+    /*------------------------------------------------------------*/
+    /*-----------------------------Variables----------------------*/
+    /*------------------------------------------------------------*/
+
 
 
     [SerializeField]
@@ -24,15 +27,22 @@ public class DeepEndPlayerController : DeepEndEntityController
     [SerializeField]
     private float smoothness = 0.05f;
 
-    [SerializeField]
-    private int accelerationStageCount = 5;
+    public int accelerationStageCount = 5;
 
     [HideInInspector]
-    static public Vector3 movement = new Vector3();      // Player velocity
-    static private int accel_state;     // Stage of acceleration
+    public Vector3 movement = new Vector3();      // Player velocity
+
+    [HideInInspector]
+    public int accel_state;     // Stage of acceleration
+
     static private float acceleration_flatRate;    // Acceleration per frame
     private Vector3 default_speed;
-    Timer radarTimer;
+
+
+    /*------------------------------------------------------------*/
+    /*-----------------------------Functions----------------------*/
+    /*------------------------------------------------------------*/
+
 
     // Start is called before the first frame update
     void Start()
@@ -47,7 +57,6 @@ public class DeepEndPlayerController : DeepEndEntityController
             stateMachine = new DeepEndPlayerStateMachine();
         stateMachine.Initialize(gameObject);
 
-        radarTimer = new Timer(MainController.Get().radarCooldownTime);
     }
 
     // Update is called once per frame
@@ -71,15 +80,12 @@ public class DeepEndPlayerController : DeepEndEntityController
 
             movement *= Time.deltaTime;
 
-            //Vector3 position = transform.position;
-            //position += movement;
-            //transform.position = position;
+            transform.position += movement;
 
 
 
         }
 
-        radarTimer.Execute();
         DebugControls();
         if (Input.GetKeyDown(KeyCode.Escape))
             Application.Quit();
@@ -132,12 +138,13 @@ public class DeepEndPlayerController : DeepEndEntityController
 
         // Radar Controls
         {
-            if (Input.GetKeyDown(KeyCode.F) && radarTimer.Done())
+            if (Input.GetKeyDown(KeyCode.F))
             {
-                radarTimer.Reset();
                 Sonar.Get().Activate();
             }
         }
+
+
     }
 
     public Vector3 GetMovementVector()
@@ -145,4 +152,8 @@ public class DeepEndPlayerController : DeepEndEntityController
         return movement;
     }
 
+    public override void TakeDamage(int dmg)
+    {
+        MainController.Get().GetStats().LogDamageTaken(dmg);
+    }
 }

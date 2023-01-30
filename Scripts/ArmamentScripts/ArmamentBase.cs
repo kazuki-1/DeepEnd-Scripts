@@ -10,6 +10,7 @@ public class ArmamentBase : MonoBehaviour
     /*------------------------------------Variables-----------------------------------*/
     /*--------------------------------------------------------------------------------*/
     /*--------------------------------------------------------------------------------*/
+
     protected AK.Wwise.Event fireEvent;
     //protected AK.Wwise.Event explosionEvent;
 
@@ -203,7 +204,9 @@ public class ArmamentBase : MonoBehaviour
 
     public bool CheckDirectionToTarget(Vector3 target, float angleThreshold = 10.0f)
     {
+
         Vector3 dir = target- transform.position;
+        dir.y = 0.0f;
         dir.Normalize();
         float angle = Vector3.Angle(transform.forward, dir);
         if (Vector3.Angle(transform.forward, dir) > angleThreshold)

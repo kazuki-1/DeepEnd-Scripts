@@ -123,7 +123,7 @@ GameObject:
   - component: {fileID: 1035480990592051895}
   m_Layer: 0
   m_Name: AimedTorpedo
-  m_TagString: Untagged
+  m_TagString: Torpedo
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -221,13 +221,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12050d62672244843a582a64c5b5abe4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  explosionParticlePrefab: {fileID: 1722726733478836, guid: c1c88308ebb5d2541a282905b854ee4c,
-    type: 3}
+  explosionParticlePrefab: {fileID: 1722726733478836, guid: c1c88308ebb5d2541a282905b854ee4c, type: 3}
   explosionSoundEvent:
     idInternal: 0
     valueGuidInternal: 
-    WwiseObjectReference: {fileID: 11400000, guid: e49b47574f03f8245bc3a04f33999619,
-      type: 2}
+    WwiseObjectReference: {fileID: 11400000, guid: e49b47574f03f8245bc3a04f33999619, type: 2}
   waterTrailEffect: {fileID: 164689717102464350}
   source: {fileID: 0}
   direction: {x: 0, y: 0, z: 1}
@@ -331,13 +329,11 @@ PrefabInstance:
   m_SourcePrefab: {fileID: 100100000, guid: a278c8d8a3357174aa8fda3ee84f2c59, type: 3}
 --- !u!1 &164689717102464350 stripped
 GameObject:
-  m_CorrespondingSourceObject: {fileID: 1540040260711024, guid: a278c8d8a3357174aa8fda3ee84f2c59,
-    type: 3}
+  m_CorrespondingSourceObject: {fileID: 1540040260711024, guid: a278c8d8a3357174aa8fda3ee84f2c59, type: 3}
   m_PrefabInstance: {fileID: 165613682420662062}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &170177921098299026 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 4775379269913020, guid: a278c8d8a3357174aa8fda3ee84f2c59,
-    type: 3}
+  m_CorrespondingSourceObject: {fileID: 4775379269913020, guid: a278c8d8a3357174aa8fda3ee84f2c59, type: 3}
   m_PrefabInstance: {fileID: 165613682420662062}
   m_PrefabAsset: {fileID: 0}

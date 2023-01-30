@@ -4,9 +4,14 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
+    /*------------------------------------------------------------*/
+    /*-----------------------------Variables----------------------*/
+    /*------------------------------------------------------------*/
+
     [System.Serializable]
     public class Entity
     {
+        public EnemyType type;
         public GameObject entityPrefab;
         public int spawnRatio = 5;
     }
@@ -17,22 +22,33 @@ public class EnemySpawner : MonoBehaviour
         Submarine
     };
 
+    [SerializeField]
+    bool enableSpawning = true;
 
+    [SerializeField]
+    float radius = 1000;
 
-    public float radius = 1000;
+    [SerializeField]
+    float spawnInterval = 10.0f;
+
 
     [Tooltip("How many vertices does the circle have")]
     public int vertexCount= 50;
 
-    public List<Entity> entities = new List<Entity>();
+    public List<Entity> entityLibrary = new List<Entity>();
+    Dictionary<EnemyType, Entity> entities = new Dictionary<EnemyType, Entity>();
     public int enemyCount = 30;
+    public int maxEnemyOnField = 4;
 
 
-
-
+    int constValue = 0;
     List<Vector3> spawnPoints = new List<Vector3>();
 
     Timer timer = new Timer();
+
+    /*------------------------------------------------------------*/
+    /*-----------------------------Functions----------------------*/
+    /*------------------------------------------------------------*/
 
 
     // Start is called before the first frame update
@@ -52,24 +68,52 @@ public class EnemySpawner : MonoBehaviour
             spawnPoints.Add(point);
 
         }
-
+        foreach (var entity in entityLibrary)
+        {
+            entities.Add(entity.type, entity);
+            constValue += entity.spawnRatio;
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
+        // For debug use
+        if (!enableSpawning)
+            return;
+
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+
+
+
         timer.Execute();
 
-        if (timer.OnEveryPass(10.0f))
-            Spawn(0);
+        // if there are too many enemies on field
+        if (enemies.Length < maxEnemyOnField)
+        {
 
-
-
+            if (timer.OnEveryPass(spawnInterval))
+            {
+                int randNum = Random.Range(0, constValue - 1);      // We use this to determine what will be spawned
+                int index = 0;
+                int min = -1;
+                int max = 0;
+                foreach (var entity in entities)
+                {
+                    max += entity.Value.spawnRatio;
+                    if (randNum > min && randNum < max)
+                        Spawn(entity.Key);
+                    min += entity.Value.spawnRatio;
+                    ++index;
+                }
+            }
+        }
     }
 
-    void Spawn(int itr)
+    void Spawn(EnemyType itr)
     {
         GameObject obj = Instantiate<GameObject>(entities[itr].entityPrefab, spawnPoints[Random.Range(0, spawnPoints.Count)], Quaternion.identity);
+        MainController.Get().GetStats().LogSpawned(itr);
     }
 
     private void OnDrawGizmos()

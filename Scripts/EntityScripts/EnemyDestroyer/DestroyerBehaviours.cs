@@ -49,7 +49,7 @@ namespace DestroyerStates
 
 
             float distance = Vector3.Magnitude(target.position - transform.position);
-            if (distance  < controller.firingRange * .5f)
+            if (distance  < controller.firingRange)
                 Transition((int)DestroyerStateMachine.StateEnum.PursuitAndAttack);
 
             if (!controller.IsAlive())
@@ -151,6 +151,7 @@ namespace DestroyerStates
         {
             //controller.Sink();
             // Placeholder
+            MainController.Get().GetStats().LogSunk(EnemySpawner.EnemyType.Destroyer);
             controller.Destroy();
         }
 

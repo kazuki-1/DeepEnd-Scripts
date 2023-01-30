@@ -118,6 +118,11 @@ public class AimedTorpedoScript : MonoBehaviour
         Transform transform = GetComponent<Transform>();
         if (other.gameObject.GetComponent<DeepEndEntityController>() != null)
         {
+
+            if (other.gameObject.name == "DeepEndPlayer")
+                MainController.Get().GetStats().LogTorpedoHit();
+
+
             other.gameObject.GetComponent<DeepEndEntityController>().TakeDamage(MainController.Get().aimedTorpedoParameters.damage);
 
             // Instantiates the particle system

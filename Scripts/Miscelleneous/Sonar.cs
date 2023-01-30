@@ -5,13 +5,20 @@ using UnityEngine;
 public class Sonar : MonoBehaviour
 {
     bool isActivated = false;
-    Timer timer;
+    Timer effectTimer;
+    Timer cooldownTimer;
 
     [SerializeField]
     AK.Wwise.Event playSonarSound;
 
     [SerializeField]
     AK.Wwise.Event stopSonarSound;
+
+    [SerializeField]
+    float radarEffectTime = 10.0f;
+
+    [SerializeField]
+    float cooldownTime = 15.0f;
 
     GameObject player;
     static public Sonar Get()
@@ -26,7 +33,8 @@ public class Sonar : MonoBehaviour
     {
         player = GameObject.FindWithTag("Player");
         minimapCamera = GetComponent<Camera>();
-        timer = new Timer(MainController.Get().radarEffectTime);
+        effectTimer = new Timer(radarEffectTime);
+        cooldownTimer = new Timer(cooldownTime);
     }
 
     // Update is called once per frame
@@ -41,18 +49,22 @@ public class Sonar : MonoBehaviour
             minimapCamera.cullingMask &= ~(1 << mask);
 
         if(isActivated)
-        { 
-            timer.Execute();
-            if (timer.Done())
+        {
+            effectTimer.Execute();
+            if (effectTimer.Done())
                 Deactivate();
         }
+
+        cooldownTimer.Execute();
 
     }
     public void Activate()
     {
+        if (!cooldownTimer.Done())
+            return;
         playSonarSound.Post(player);
         isActivated = true;
-        timer.Reset();
+        effectTimer.Reset();
     }
     public void Deactivate()
     {

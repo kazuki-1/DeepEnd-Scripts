@@ -170,7 +170,7 @@ namespace HomingTorpedoStates
                         rimg.texture = textures[ind + current_index];
                     }
                 }
-                MainController.Get().PauseAll();
+                MainController.Get().PauseAllAudio();
                 targets[selected_index].GetComponentInChildren<AudioInterface>().Post();
             }
             targetPanel.transform.position = Vector3.Lerp(targetPanel.transform.position, uiObjs[selected_index - current_index].transform.position, 0.02f);
@@ -209,7 +209,7 @@ namespace HomingTorpedoStates
             controller.isTargeting = false;
             if (targetPanel != null)
                 targetPanel.SetActive(false);
-            MainController.Get().ResumeAll();
+            MainController.Get().ResumeAllAudio();
         }
 
     }

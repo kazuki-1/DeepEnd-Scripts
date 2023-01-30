@@ -91,6 +91,10 @@ public class BatteryRoundScript : MonoBehaviour
         if(other.gameObject.GetComponent<DeepEndEntityController>())
         {
 
+            if (other.gameObject.name == "DeepEndPlayer")
+                MainController.Get().GetStats().LogTorpedoHit();
+
+
             // Instantiates the particle system
             other.gameObject.GetComponent<DeepEndEntityController>().TakeDamage(MainController.Get().batteryParameters.damage);
             explosionParticle = Instantiate<GameObject>(explosionParticlePrefab, transform);
