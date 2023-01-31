@@ -33,7 +33,7 @@ Material:
     - _BUILTIN_QueueControl: 0
     - _BUILTIN_QueueOffset: 0
     - _Depth: 2.88
-    - _Displacement: 0.02
+    - _Displacement: 0.01
     - _NormalStrength: 39.14
     - _Smoothness: 0.5
     - _Strength: 0.05

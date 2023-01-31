@@ -177,7 +177,7 @@ namespace SubmarineStates
             if (parent.transform.position.y < -controller.submergeHeight)
             {
                 velocity = Vector3.Lerp(velocity, Vector3.zero, Time.deltaTime);
-                if (velocity.magnitude < 0.1f)
+                if (velocity.magnitude < 0.01f)
                     Transition((int)SubmarineStateMachine.StateEnum.Approach);
 
 
@@ -188,7 +188,7 @@ namespace SubmarineStates
             parent.transform.position += velocity * Time.deltaTime;
 
             // Transitions when velocity stops
-            if (velocity.magnitude < 0.01f)
+            if (velocity.magnitude < 0.01f && (parent.transform.position.y < -controller.submergeHeight))
                 Transition((int)SubmarineStateMachine.StateEnum.Approach);
 
             if (!controller.IsAlive())
@@ -228,7 +228,7 @@ namespace SubmarineStates
 
 
 
-            cur_speed += (controller.maximumSpeed / 10.0f) * Time.deltaTime;        // takes 10 seconds to reach maximum speed;
+            cur_speed += (controller.maximumSpeed / 10.0f);        // takes 10 seconds to reach maximum speed;
             cur_speed = Mathf.Clamp(cur_speed, 0.0f, controller.maximumSpeed);
 
             Vector3 distance = predictedPosition - controller.transform.position;
@@ -241,7 +241,7 @@ namespace SubmarineStates
             {
                 Quaternion rot = Quaternion.FromToRotation(Vector3.forward, direction);
                 controller.transform.rotation = Quaternion.Slerp(controller.transform.rotation, rot, 0.2f * Time.deltaTime);
-                controller.transform.position += controller.transform.forward * cur_speed * .25f;
+                controller.transform.position += controller.transform.forward * cur_speed * .25f * Time.deltaTime;
             }
             controller.GetComponent<ArmamentController>().FireArmaments();
 
@@ -275,6 +275,8 @@ namespace SubmarineStates
             fx = GameObject.Instantiate(controller.defeatEffectPrefab, parent.transform);
             fx.transform.localScale = new Vector3(20, 20, 20);
             fx.transform.localPosition = Vector3.zero;
+            controller.GetComponentInChildren<AudioInterface>().Pause();
+
             controller.defeatSFXEvent.Post(parent);
         }
 

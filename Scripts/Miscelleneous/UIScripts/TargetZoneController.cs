@@ -26,13 +26,13 @@ public class TargetZoneController : MonoBehaviour
     }
     public void Enable()
     {
-        //lineObj.SetActive(true);
+        quad.gameObject.SetActive(true);
         quad.Enable();
     }
 
     public void Disable()
     {
-        //lineObj.SetActive(false);
+        quad.gameObject.SetActive(false);
         quad.Disable();
     }
 

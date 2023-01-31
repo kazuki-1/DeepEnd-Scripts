@@ -37,7 +37,7 @@ public class HomingTorpedoTubeController : ArmamentBase
 
         starting_direction = transform.forward;
         starting_position = transform.position;
-
+        fireEvent = MainController.Get().homingTorpedoParameters.fireSFXEvent;
 
 
     }
@@ -122,8 +122,11 @@ public class HomingTorpedoTubeController : ArmamentBase
 
     public override void RotateToPoint(Vector3 point)
     {
+        Quaternion quart = GetComponentInParent<DeepEndEntityController>().transform.rotation;
+
+
         Vector3 p = new Vector3(point.x, 0.0f, point.z);                            // Target point
-        Vector3 o = new Vector3(starting_direction.x, 0.0f, starting_direction.z);  // Origin
+        Vector3 o = quart * starting_direction;  // Origin
 
         float angle_diff = Vector3.Angle(p.normalized, o.normalized);
         if (Mathf.Abs(angle_diff) > deadZoneAngle.x && Mathf.Abs(angle_diff) < deadZoneAngle.y)             // Checks if is within deadzone angle
@@ -139,7 +142,7 @@ public class HomingTorpedoTubeController : ArmamentBase
         forward.Normalize();
         Quaternion q = Quaternion.LookRotation(forward, transform.up);
         target_direction = point.normalized;
-        transform.localRotation = Quaternion.Slerp(transform.localRotation, q, 0.3f);
+        transform.rotation = Quaternion.Slerp(transform.rotation, q, 0.3f);
 
     }
 
@@ -182,7 +185,7 @@ public class HomingTorpedoTubeController : ArmamentBase
         left.y -= aimAngle;
         right.y += aimAngle;
 
-        Vector3 origin = transform.position;
+        Vector3 origin = transform.localPosition;
         origin.y -= 10.0f;
         left = Quaternion.Euler(left) * Vector3.forward * 1000.0f;
         right = Quaternion.Euler(right) * Vector3.forward * 1000.0f;

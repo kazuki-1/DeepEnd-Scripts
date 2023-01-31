@@ -6,8 +6,6 @@ using UnityEngine.UI;
 
 public class TorpedoIndicator : MonoBehaviour
 {
-    [SerializeField]
-    Texture2D torpedoTexture;
 
     [SerializeField]
     GameObject player;
@@ -24,7 +22,6 @@ public class TorpedoIndicator : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        torpedoUI.GetComponent<RawImage>().texture = torpedoTexture;
         torpedoUI.SetActive(false);
         //float anglePerCycle = 360 / vertices;
         //Vector2 center = Vector2.zero;

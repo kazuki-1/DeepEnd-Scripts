@@ -36,7 +36,6 @@ public class ArmamentBase : MonoBehaviour
     [SerializeField]
     public Vector2 UIPosition;
 
-    
 
 
     protected Vector3 starting_position;
@@ -101,9 +100,11 @@ public class ArmamentBase : MonoBehaviour
     {
 
         // TODO : Get fire direction from mouse
-        Vector3 dir = transform.forward;
+        // Vector3 dir = transform.forward;
+        Vector3 dir = GetComponentInParent<ArmamentController>().GetDirection();
+        
 
-        return dir;
+        return dir.normalized;
         
     }
 
@@ -119,8 +120,14 @@ public class ArmamentBase : MonoBehaviour
     public virtual void RotateToPoint(Vector3 point)
     {
 
+        Quaternion quart = GetComponentInParent<DeepEndEntityController>().transform.rotation;
+
+
+        //Vector3 parentForward = GetComponentInParent<DeepEndEntityController>().transform.forward; 
+
         Vector3 p = new Vector3(point.x, 0.0f, point.z);                            // Target point
-        Vector3 o = new Vector3(starting_direction.x, 0.0f, starting_direction.z);  // Origin
+        Vector3 o = quart * starting_direction;  // Origin
+        o.y = 0.0f;
 
         float angle_diff = Vector3.Angle(p.normalized, o.normalized);
         if (Mathf.Abs(angle_diff) > angleLimit)
@@ -135,13 +142,14 @@ public class ArmamentBase : MonoBehaviour
         forward.y = 0;
         forward.Normalize();
         float threshold = MainController.Get().armamentAngleDifferenceThreshold;
-        if (Mathf.Abs(Vector3.Angle(transform.forward.normalized, forward)) > threshold)
+        float angleDifference = Mathf.Abs(Vector3.Angle(transform.forward.normalized, forward));
+        if (angleDifference > threshold)
             outOfBounds = true;
 
 
         Quaternion q = Quaternion.LookRotation(forward, transform.up);
         target_direction = point.normalized;
-        transform.localRotation = Quaternion.Slerp(transform.localRotation, q, 0.003f);
+        transform.rotation = Quaternion.Slerp(transform.rotation, q, 0.03f);
 
 
     }

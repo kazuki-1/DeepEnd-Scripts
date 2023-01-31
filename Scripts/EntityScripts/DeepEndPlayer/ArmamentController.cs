@@ -159,6 +159,10 @@ public class ArmamentController : MonoBehaviour
 
     protected void RenderArmamentTargetingZone()
     {
+        // Disabled
+        return;
+
+
         TargetZoneController target = GetComponent<TargetZoneController>();
         ArmamentList cur = armaments[(int)current_armament];
         foreach (ArmamentBase armament in cur.list)
@@ -249,7 +253,7 @@ public class ArmamentController : MonoBehaviour
         }
     }
 
-    public Vector3 GetDirection()
+    virtual public Vector3 GetDirection()
     {
 
         Transform player_transform = GameObject.Find("DeepEndPlayer").transform;
@@ -257,7 +261,7 @@ public class ArmamentController : MonoBehaviour
         Vector3 pos = Camera.main.transform.position;
         Vector3 dist = player_transform.position - pos;
         dist.y = 0.0f;
-        pos = player_transform.position + dist.normalized * 200.0f;
+        pos = /*player_transform.position + */dist.normalized * 200.0f;
         pos.y = 0.0f;
 
         return pos;

@@ -56,6 +56,10 @@ public class MinimapCameraController : MonoBehaviour
     void Update()
     {
         transform.position = offset + target.position;
+        Vector3 euler = target.eulerAngles;
+        euler.x = transform.eulerAngles.x;
+        euler.z = transform.eulerAngles.z;
+        transform.eulerAngles = euler;
         //GetComponent<Camera>().cullin
     }
 

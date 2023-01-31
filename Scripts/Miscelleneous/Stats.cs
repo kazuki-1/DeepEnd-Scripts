@@ -38,6 +38,10 @@ public class Stats : MonoBehaviour
     /*-----------------------------Functions----------------------*/
     /*------------------------------------------------------------*/
 
+    static public Stats Get()
+    {
+        return MainController.Get().GetStats();
+    }
 
 
     // Start is called before the first frame update

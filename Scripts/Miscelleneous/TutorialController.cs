@@ -20,6 +20,7 @@ public class TutorialController : MonoBehaviour
 
         public bool timed = true;
 
+
         [HideInInspector]
         public TextMeshProUGUI text;
 
@@ -57,6 +58,10 @@ public class TutorialController : MonoBehaviour
     [SerializeField]
     List<TutorialEntity>entities = new List<TutorialEntity>();
 
+    [HideInInspector]
+    public bool isPaused = false;
+
+
     GameObject tutorialDestroyer;
     GameObject tutorialSubmarine;
 
@@ -70,10 +75,20 @@ public class TutorialController : MonoBehaviour
     int cur_ind = 0;
     bool isPlaying = true;
 
+
+    static public TutorialController Get()
+    {
+        GameObject obj = GameObject.Find("TutorialController");
+        if(obj != null)
+            return obj.GetComponent<TutorialController>();
+        return null;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
         panel.SetActive(false);
+        
     }
 
     // Update is called once per frame
@@ -82,7 +97,9 @@ public class TutorialController : MonoBehaviour
 
 
         timer.Execute();
-        cur_ind = Mathf.Clamp(cur_ind, 0, entities.Count - 1);
+        //cur_ind = Mathf.Clamp(cur_ind, 0, entities.Count - 1);
+
+
 
         if (timer.OnPassOnce(entities[cur_ind].timeToPlay) && isPlaying && entities[cur_ind].timed)
         {
@@ -111,6 +128,8 @@ public class TutorialController : MonoBehaviour
             }
         }
 
+        if (cur_ind >= entities.Count)
+            SceneController.Get().ToMainMenu();
 
 
         // Timer enemy spawning
@@ -129,7 +148,7 @@ public class TutorialController : MonoBehaviour
                 // so force it to play third sequence when you sink the tutorial enemy
                 BeginSequence(2);
                 defeatedDestroyer = true;
-                tutorialSubmarine = EnemySpawner.Get().Spawn(EnemySpawner.EnemyType.Submarine, new Vector3(-500, 0, 500));
+                tutorialSubmarine = EnemySpawner.Get().Spawn(EnemySpawner.EnemyType.Submarine, new Vector3(-500, 0, 1000));
                 timer.Reset();
             }
         }
@@ -146,10 +165,17 @@ public class TutorialController : MonoBehaviour
                     {
                         beginSubmarineSequence = true;
                         BeginSequence(3);
+                        timer.Reset();
                     }
                 }
             }
         }
+
+        if(beginSubmarineSequence && tutorialSubmarine.GetComponent<EnemySubmarineController>().GetStateMachine().GetStateEnum() == (int)SubmarineStateMachine.StateEnum.Sink)
+        {
+            BeginSequence(cur_ind);
+        }
+
         
 
     }
@@ -157,10 +183,15 @@ public class TutorialController : MonoBehaviour
     void Pause()
     {
         Time.timeScale = 0.0f;
+        //isPaused = true;
+        GameObject.Find("Canvas").GetComponent<Pause>().isPaused = true;
+        
     }
     void Resume()
     {
         Time.timeScale = 1.0f;
+        //isPaused = false;
+        GameObject.Find("Canvas").GetComponent<Pause>().isPaused = false;
     }
 
     void BeginSequence(int ind)

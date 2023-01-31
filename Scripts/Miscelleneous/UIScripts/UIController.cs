@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class UIController : MonoBehaviour
 {
@@ -45,6 +46,15 @@ public class UIController : MonoBehaviour
 
     [SerializeField]
     private GameObject homingTorpedoCrosshairs;
+
+    [SerializeField]
+    GameObject cannonHitIndicator;
+
+    [SerializeField]
+    GameObject torpedoHitIndicator;
+
+    [SerializeField]
+    GameObject sonarCooldownTime;
 
 
     bool initialized = false;
@@ -175,6 +185,19 @@ public class UIController : MonoBehaviour
                 selection.transform.position = Vector3.Lerp(selection.transform.position, obj.transform.position, 0.03f);
             }
         }
+
+
+        // Updates the number of bullets that hit
+        cannonHitIndicator.GetComponent<TMPro.TextMeshProUGUI>().text = MainController.Get().GetStats().stats[ArmamentController.Armaments.Cannon].hit.ToString();
+        
+        int torpCount = MainController.Get().GetStats().stats[ArmamentController.Armaments.HomingTorpedo].hit +
+            MainController.Get().GetStats().stats[ArmamentController.Armaments.AimedTorpedo].hit;
+
+        torpedoHitIndicator.GetComponent<TMPro.TextMeshProUGUI>().text = torpCount.ToString();
+
+        // Updates the cooldown time for the sonar
+        sonarCooldownTime.GetComponent<TMPro.TextMeshProUGUI>().text = Math.Round(Sonar.Get().GetCooldownTime(), 1).ToString();
+        
     }
 
     public void ActivateTargetingModule()

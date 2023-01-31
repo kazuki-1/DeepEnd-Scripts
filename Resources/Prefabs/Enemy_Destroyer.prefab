@@ -158,8 +158,7 @@ MonoBehaviour:
   data:
     idInternal: 0
     valueGuidInternal: 
-    WwiseObjectReference: {fileID: 11400000, guid: b5e98bf6027496640ab35e9a5b7949d7,
-      type: 2}
+    WwiseObjectReference: {fileID: 11400000, guid: b5e98bf6027496640ab35e9a5b7949d7, type: 2}
   decodeBank: 0
   loadAsynchronous: 0
   saveDecodedBank: 0
@@ -208,8 +207,7 @@ MonoBehaviour:
   data:
     idInternal: 0
     valueGuidInternal: 
-    WwiseObjectReference: {fileID: 11400000, guid: ba1cbe3b517a94c4da5a590fa8556467,
-      type: 2}
+    WwiseObjectReference: {fileID: 11400000, guid: ba1cbe3b517a94c4da5a590fa8556467, type: 2}
   useCallbacks: 0
   Callbacks: []
   playingId: 0
@@ -239,13 +237,11 @@ MonoBehaviour:
   SFXEvent:
     idInternal: 0
     valueGuidInternal: 
-    WwiseObjectReference: {fileID: 11400000, guid: ba1cbe3b517a94c4da5a590fa8556467,
-      type: 2}
+    WwiseObjectReference: {fileID: 11400000, guid: ba1cbe3b517a94c4da5a590fa8556467, type: 2}
   pauseEvent:
     idInternal: 0
     valueGuidInternal: 
-    WwiseObjectReference: {fileID: 11400000, guid: 5122e56f6e6521644848d362f27b4d5e,
-      type: 2}
+    WwiseObjectReference: {fileID: 11400000, guid: 5122e56f6e6521644848d362f27b4d5e, type: 2}
 --- !u!1 &5379572303881300872
 GameObject:
   m_ObjectHideFlags: 0
@@ -387,7 +383,7 @@ Transform:
   m_Children:
   - {fileID: 5377929847475728788}
   - {fileID: 6327488667120079841}
-  - {fileID: 6867565669132996576}
+  - {fileID: 2095595616822449219}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -0.847, y: -0.005, z: 0.531}
@@ -458,13 +454,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthPoints: 10
   maximumSpeed: 30
-  defeatEffectPrefab: {fileID: 1121192042590650, guid: cae905469fa59a248be9e59ff331131e,
-    type: 3}
+  defeatEffectPrefab: {fileID: 1121192042590650, guid: cae905469fa59a248be9e59ff331131e, type: 3}
   defeatSFXEvent:
     idInternal: 0
     valueGuidInternal: 
-    WwiseObjectReference: {fileID: 11400000, guid: 2ca9eedb39010124f8fa7a1ca16ef77f,
-      type: 2}
+    WwiseObjectReference: {fileID: 11400000, guid: 2ca9eedb39010124f8fa7a1ca16ef77f, type: 2}
   movementSpeed: 0
   firingRange: 200
   rammingRange: 71.31
@@ -835,7 +829,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!1 &5443694393838363199
+--- !u!1 &6010577933716572455
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -843,9 +837,9 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 6867565669132996576}
-  - component: {fileID: 3029567806087041980}
-  - component: {fileID: 5659790251601593479}
+  - component: {fileID: 2095595616822449219}
+  - component: {fileID: 5801558449731641066}
+  - component: {fileID: 4513468186499708861}
   m_Layer: 9
   m_Name: MinimapObject
   m_TagString: MinimapObject
@@ -853,35 +847,35 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &6867565669132996576
+--- !u!4 &2095595616822449219
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5443694393838363199}
-  m_LocalRotation: {x: -0.000000021855694, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 35, z: 0}
-  m_LocalScale: {x: 0.9149987, y: 0.9149987, z: 0.9149987}
+  m_GameObject: {fileID: 6010577933716572455}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 50, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5377980591302124970}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!108 &3029567806087041980
+--- !u!108 &5801558449731641066
 Light:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5443694393838363199}
+  m_GameObject: {fileID: 6010577933716572455}
   m_Enabled: 1
   serializedVersion: 10
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 1, g: 0, b: 0, a: 1}
-  m_Intensity: 7.4
-  m_Range: 269.5
+  m_Intensity: 300
+  m_Range: 300
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
@@ -930,15 +924,15 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
---- !u!122 &5659790251601593479
+--- !u!122 &4513468186499708861
 Halo:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5443694393838363199}
+  m_GameObject: {fileID: 6010577933716572455}
   m_Enabled: 0
   m_Color:
     serializedVersion: 2
     rgba: 4278321407
-  m_Size: 233.02
+  m_Size: 300

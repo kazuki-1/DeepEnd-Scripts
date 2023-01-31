@@ -56,6 +56,16 @@ public class AimedTorpedoScript : MonoBehaviour
     void Update()
     {
 
+        // Allows the minimap indicator to appear above water
+        // So as to not allow the water to block it
+        Transform minimapTransform = GetComponentInChildren<Light>().transform;
+        Vector3 p = minimapTransform.position;
+        p.y = 10.0f;
+        minimapTransform.transform.position = p;
+
+
+
+
         // Movement
         {
             // Moment after launching from tubes
@@ -121,6 +131,8 @@ public class AimedTorpedoScript : MonoBehaviour
 
             if (other.gameObject.name == "DeepEndPlayer")
                 MainController.Get().GetStats().LogTorpedoHit();
+            if(other.gameObject.GetComponent<DeepEndEnemyController>() != null)
+                MainController.Get().GetStats().LogHit(ArmamentController.Armaments.AimedTorpedo);
 
 
             other.gameObject.GetComponent<DeepEndEntityController>().TakeDamage(MainController.Get().aimedTorpedoParameters.damage);
@@ -139,7 +151,6 @@ public class AimedTorpedoScript : MonoBehaviour
 
 
             GetComponentInChildren<MeshRenderer>().enabled = false;
-            MainController.Get().GetStats().LogHit(ArmamentController.Armaments.AimedTorpedo);
 
 
             //Object.Destroy(gameObject);

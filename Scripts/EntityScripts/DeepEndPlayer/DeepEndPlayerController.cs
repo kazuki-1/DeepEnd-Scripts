@@ -52,10 +52,13 @@ public class DeepEndPlayerController : DeepEndEntityController
 
         // How much speed is changed everytime you speed up or down
         acceleration_flatRate = incremental_speed / (float)accelerationStageCount;
+        accel_state = 3;
 
         if (stateMachine == null)
             stateMachine = new DeepEndPlayerStateMachine();
         stateMachine.Initialize(gameObject);
+
+        SceneController.Get().HideCursor();
 
     }
 
@@ -131,6 +134,9 @@ public class DeepEndPlayerController : DeepEndEntityController
                 Debug.Log(debug_speed);
             }
 
+
+            float hori = Input.GetAxis("Horizontal");
+            transform.eulerAngles += new Vector3(0, hori * Time.deltaTime * 10, 0);
 
 
             accel_state = Mathf.Clamp(accel_state, -1, accelerationStageCount);

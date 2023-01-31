@@ -157,11 +157,17 @@ namespace DestroyerStates
             fx.transform.localScale = new Vector3(20, 20, 20);
             fx.transform.localPosition = Vector3.zero;
             controller.defeatSFXEvent.Post(parent);
+            controller.GetComponentInChildren<AudioInterface>().Pause();
+            parent.transform.eulerAngles += new Vector3(0, 45, 0); 
             //controller.Destroy();
         }
 
         public override void Execute(GameObject parent)
         {
+
+            Transform transform = parent.transform;
+            transform.position += Vector3.down * 10 * Time.deltaTime ;
+
 
             if (!fx.GetComponent<ParticleSystem>().IsAlive())
                 End(parent);

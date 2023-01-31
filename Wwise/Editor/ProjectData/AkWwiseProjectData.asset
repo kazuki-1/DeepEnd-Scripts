@@ -382,7 +382,7 @@ MonoBehaviour:
     ParentPath: SoundBanks\Default Work Unit
     guid: d31733c48492ce49a723b8df8fb4cd52
     GuidInternal: 
-    m_lastTime: -8585266513765936885
+    m_lastTime: -8585264559611333647
     List:
     - name: DeepEnd
       guid: 3f29a0137f38f64cba1aaec2e79fd41c
@@ -410,7 +410,7 @@ MonoBehaviour:
     ParentPath: Events\Default Work Unit
     guid: 945a456216895942b143b23e9e10772e
     GuidInternal: 
-    m_lastTime: -8585266513765308650
+    m_lastTime: -8585264559609648156
     List:
     - name: ActivateTrigger
       guid: e27f6b5d88748449b134372e1f889e73
@@ -543,6 +543,26 @@ MonoBehaviour:
       maxAttenuation: 1500
       maxDuration: 4.173084
       minDuration: 4.173084
+    - name: playFogAmbient
+      guid: 8ce74b46ee45d9498c6449016bd7fb62
+      id: 4027899003
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 945a456216895942b143b23e9e10772e
+      - ElementName: SFX
+        ObjectType: 4
+        guid: 9d86c88d575c09419c3ea8b2e5ce514c
+      - ElementName: playFogAmbient
+        ObjectType: 3
+        guid: 8ce74b46ee45d9498c6449016bd7fb62
+      Path: Events\Default Work Unit\SFX\playFogAmbient
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
     - name: PlayShipSound
       guid: a23c61348ef0364e9c19f131570eb62d
       id: 1242247530
@@ -563,6 +583,26 @@ MonoBehaviour:
       maxAttenuation: 1500
       maxDuration: -1
       minDuration: -1
+    - name: playShipSunkSound
+      guid: 171601d2b85c854486a3f7f51f10556e
+      id: 3093419889
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 945a456216895942b143b23e9e10772e
+      - ElementName: SFX
+        ObjectType: 4
+        guid: 9d86c88d575c09419c3ea8b2e5ce514c
+      - ElementName: playShipSunkSound
+        ObjectType: 3
+        guid: 171601d2b85c854486a3f7f51f10556e
+      Path: Events\Default Work Unit\SFX\playShipSunkSound
+      maxAttenuation: 1500
+      maxDuration: 2.788458
+      minDuration: 2.788458
     - name: PlaySonar
       guid: 6a6c053b07a82740949da3486ca34b63
       id: 2526104420
@@ -603,6 +643,26 @@ MonoBehaviour:
       maxAttenuation: 1500
       maxDuration: -1
       minDuration: -1
+    - name: playTorpedoFireSound
+      guid: 8deac1155bc8fc4bb64d249deafc612d
+      id: 93836441
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 945a456216895942b143b23e9e10772e
+      - ElementName: SFX
+        ObjectType: 4
+        guid: 9d86c88d575c09419c3ea8b2e5ce514c
+      - ElementName: playTorpedoFireSound
+        ObjectType: 3
+        guid: 8deac1155bc8fc4bb64d249deafc612d
+      Path: Events\Default Work Unit\SFX\playTorpedoFireSound
+      maxAttenuation: 0
+      maxDuration: 1.653855
+      minDuration: 1.653855
     - name: PlayTorpedoHitSound
       guid: 4d5fb3d385aa134e8aae2e5a58f97f1f
       id: 3018773612
@@ -745,7 +805,7 @@ MonoBehaviour:
         guid: 21fc4bc26d43c8449d6a56fc05cde4e6
       Path: Triggers\Default Work Unit\PlaySound
   ExpandedFileSystemItemIds: 
-  ExpandedWaapiItemIds: 05000000060000000b0000000f00000010000000
+  ExpandedWaapiItemIds: 0500000006000000070000000c000000
   AutoSyncSelection: 0
   autoPopulateEnabled: 1
   currentDataSource: 0

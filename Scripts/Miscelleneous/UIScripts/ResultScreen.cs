@@ -18,9 +18,13 @@ public class ResultScreen : MonoBehaviour
         public float ratio;
     }
 
+    public Sprite cRankEmblem;
+    public Sprite bRankEmblem;
+    public Sprite aRankEmblem;
+    public Sprite sRankEmblem;
 
-
-
+    public Image rankImage;
+    public Button quitToMenuButton;
     public GameObject resultScreen;
     public Result battleships   = new Result(); 
     public Result submarines    = new Result();
@@ -33,15 +37,19 @@ public class ResultScreen : MonoBehaviour
     public TextMeshProUGUI accuracyTextMesh;
     public TextMeshProUGUI damageTakenTextMesh;
 
-    Button mainMenuButton;
+    bool isOpen = false;
+    CanvasGroup cg;
+
+
     // Start is called before the first frame update
     void Start()
     {
         GetComponentInChildren<Button>().onClick.AddListener(GetComponentInParent<SceneController>().ToMainMenu);
-
+        cg = resultScreen.GetComponent<CanvasGroup>();
+        cg.alpha = 0.0f;
 
         resultScreen.SetActive(false);
-
+        quitToMenuButton.onClick.AddListener(SceneController.Get().ToMainMenu);
 
 
     }
@@ -49,7 +57,7 @@ public class ResultScreen : MonoBehaviour
     public void Initialize()
     {
         Stats stats = MainController.Get().GetStats();
-
+        resultScreen.SetActive(true);
 
         int hit = 0;
         int total = 0;
@@ -59,9 +67,11 @@ public class ResultScreen : MonoBehaviour
         Stats.EnemyStats enemyStats = stats.enemyStats[EnemySpawner.EnemyType.Destroyer];
         total = enemyStats.count;
         hit = enemyStats.sunkCount;
-        ratio = (float)hit / (float)total;
-        battleships.ratio = ratio;
-
+        if (total > 0)
+        {
+            ratio = (float)hit / (float)total;
+            battleships.ratio = ratio;
+        }
         battleships.result = hit.ToString() + " / " + total.ToString();
         battleships.countText.text = battleships.result;
 
@@ -70,23 +80,27 @@ public class ResultScreen : MonoBehaviour
         enemyStats = stats.enemyStats[EnemySpawner.EnemyType.Submarine];
         total = enemyStats.count;
         hit = enemyStats.sunkCount;
-        ratio = (float)hit / (float)total;
-        battleships.ratio = ratio;
 
-        battleships.result = hit.ToString() + " / " + total.ToString();
-        battleships.countText.text = battleships.result;
+        if (total > 0)
+        {
+            ratio = (float)hit / (float)total;
+            submarines.ratio = ratio;
+        }
+        submarines.result = hit.ToString() + " / " + total.ToString();
+        submarines.countText.text = submarines.result;
 
 
         // Cannons fired
         Stats.ArmamentStats armamentStats = stats.stats[ArmamentController.Armaments.Cannon];
         total = armamentStats.fired;
         hit = armamentStats.hit;
-        ratio = (float)hit / (float)total;
-        if (ratio == float.NaN)
-            ratio = 1.0f;
 
-        cannon.ratio = ratio;
+        if (total > 0)
+        {
+            ratio = (float)hit / (float)total;
 
+            cannon.ratio = ratio;
+        }
         cannon.result = hit.ToString() + " / " + total.ToString();
         cannon.countText.text = cannon.result;
 
@@ -95,13 +109,14 @@ public class ResultScreen : MonoBehaviour
         armamentStats = stats.stats[ArmamentController.Armaments.AimedTorpedo];
         total = armamentStats.fired;
         hit = armamentStats.hit;
-        ratio = (float)hit / (float)total;
-        if (ratio == float.NaN)
-            ratio = 1.0f;
-        torpedo.ratio = ratio;
 
+        if (total > 0)
+        {
+            ratio = (float)hit / (float)total;
+            torpedo.ratio = ratio;
+        }
         torpedo.result = hit.ToString() + " / " + total.ToString();
-        torpedo.countText.text = cannon.result;
+        torpedo.countText.text = torpedo.result;
 
         // CannonDamage taken
         total = stats.cannonHitsTaken;
@@ -112,33 +127,72 @@ public class ResultScreen : MonoBehaviour
 
 
         ratio = 0.0f;
+        float sinkRatio = 0.0f;
         // To prevent it dividing 0
-        if (battleships.ratio > 0.0f)
-            ratio += battleships.ratio;
-        if(submarines.ratio > 0.0f)
-            ratio += submarines.ratio;
 
-        ratio = (battleships.ratio + submarines.ratio) / 2.0f;
-        enemyEfficiencyTextMesh.text = (ratio * 100).ToString() + "%";
+        sinkRatio = (battleships.ratio + submarines.ratio) / 2.0f;
+        enemyEfficiencyTextMesh.text = (sinkRatio * 100).ToString() + "%";
 
-        ratio = (cannon.ratio + submarines.ratio) / 2.0f;
-        accuracyTextMesh.text = (ratio * 100).ToString() + "%";
+        float hitRatio = (cannon.ratio + submarines.ratio) / 2.0f;
+        accuracyTextMesh.text = (hitRatio * 100).ToString() + "%";
 
-        ratio = (float)stats.damageTaken / 100.0f;
-        ratio = Mathf.Min(ratio, 99.9f);
-        damageTakenTextMesh.text = (100.0f - 99.9f).ToString() + "%";
 
+
+        float damageRatio = (float)stats.damageTaken / 100.0f;
+        damageRatio = Mathf.Min(ratio, 99.9f);
+        damageTakenTextMesh.text = damageRatio.ToString() + "%";
+
+        float finalRank = sinkRatio + damageRatio + hitRatio / 3.0f;
+
+        Sprite tex = null;
+        if (finalRank > .9f)
+            tex = sRankEmblem;
+        else if (finalRank > .8f)
+            tex = aRankEmblem;
+        else if (finalRank > .6f)
+            tex = bRankEmblem;
+        else
+            tex = cRankEmblem;
+
+
+        rankImage.sprite = tex;
+
+
+
+
+
+        Time.timeScale = 0.0f;
+        Pause.Get().isPaused = true;
+        isOpen = true;
+
+        SceneController.Get().ShowCursor();
     }
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKey(KeyCode.LeftShift))
+        // Only lerps the alpha of the canvas and skip initialization conditions if is laready opened
+        if (isOpen)
         {
-            if(Input.GetKeyDown(KeyCode.T))
-            {
-                Initialize();
-                resultScreen.SetActive(true);
-            }
+            cg.alpha = Mathf.Lerp(cg.alpha, 1.0f, 0.1f);
+            return;
         }
+
+
+
+        // Conditions to show result screen
+        int maxEnemy = EnemySpawner.Get().enemyCount;
+        int sunkEnemies = 0;
+
+        foreach (var entity in Stats.Get().enemyStats)
+        {
+            sunkEnemies += entity.Value.sunkCount;
+        }
+        
+        // If stage timer done
+        if (GetComponentInChildren<StageTimer>().IsDone() || sunkEnemies >= maxEnemy)
+            Initialize();
+
+
+
     }
 }

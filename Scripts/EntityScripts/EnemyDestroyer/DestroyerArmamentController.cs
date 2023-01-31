@@ -75,4 +75,9 @@ public class DestroyerArmamentController : ArmamentController
         return munitions.cannons >= 0;
     }
 
+    public override Vector3 GetDirection()
+    {
+        return transform.forward;
+    }
+
 }

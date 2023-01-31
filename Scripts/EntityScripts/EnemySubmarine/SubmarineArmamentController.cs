@@ -70,4 +70,10 @@ public class SubmarineArmamentController : ArmamentController
         return munitions.aimedTorpedo >= 0;
      
     }
+
+    public override Vector3 GetDirection()
+    {
+        return transform.forward;
+    }
+
 }

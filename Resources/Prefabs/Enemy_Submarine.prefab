@@ -156,13 +156,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthPoints: 5
   maximumSpeed: 0.2
-  defeatEffectPrefab: {fileID: 1121192042590650, guid: cae905469fa59a248be9e59ff331131e,
-    type: 3}
+  defeatEffectPrefab: {fileID: 1121192042590650, guid: cae905469fa59a248be9e59ff331131e, type: 3}
   defeatSFXEvent:
     idInternal: 0
     valueGuidInternal: 
-    WwiseObjectReference: {fileID: 11400000, guid: 2ca9eedb39010124f8fa7a1ca16ef77f,
-      type: 2}
+    WwiseObjectReference: {fileID: 11400000, guid: 2ca9eedb39010124f8fa7a1ca16ef77f, type: 2}
   movementSpeed: 0
   attackRange: 500
   minimumRange: 200
@@ -447,8 +445,7 @@ MonoBehaviour:
   data:
     idInternal: 0
     valueGuidInternal: 
-    WwiseObjectReference: {fileID: 11400000, guid: b5e98bf6027496640ab35e9a5b7949d7,
-      type: 2}
+    WwiseObjectReference: {fileID: 11400000, guid: b5e98bf6027496640ab35e9a5b7949d7, type: 2}
   decodeBank: 0
   loadAsynchronous: 0
   saveDecodedBank: 0
@@ -497,8 +494,7 @@ MonoBehaviour:
   data:
     idInternal: 0
     valueGuidInternal: 
-    WwiseObjectReference: {fileID: 11400000, guid: ba1cbe3b517a94c4da5a590fa8556467,
-      type: 2}
+    WwiseObjectReference: {fileID: 11400000, guid: ba1cbe3b517a94c4da5a590fa8556467, type: 2}
   useCallbacks: 0
   Callbacks: []
   playingId: 0
@@ -528,13 +524,11 @@ MonoBehaviour:
   SFXEvent:
     idInternal: 0
     valueGuidInternal: 
-    WwiseObjectReference: {fileID: 11400000, guid: de4a682b3ad71874bac74869b891b43c,
-      type: 2}
+    WwiseObjectReference: {fileID: 11400000, guid: de4a682b3ad71874bac74869b891b43c, type: 2}
   pauseEvent:
     idInternal: 0
     valueGuidInternal: 
-    WwiseObjectReference: {fileID: 11400000, guid: 1ee429c62a5c4414eb4779d24ce57920,
-      type: 2}
+    WwiseObjectReference: {fileID: 11400000, guid: 1ee429c62a5c4414eb4779d24ce57920, type: 2}
 --- !u!1 &8180256673585046461
 GameObject:
   m_ObjectHideFlags: 0
@@ -560,9 +554,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8180256673585046461}
-  m_LocalRotation: {x: -0.0073958156, y: -0.000009126277, z: 0.0046342057, w: 0.9999619}
-  m_LocalPosition: {x: -50.111717, y: 76.08186, z: 13.364138}
-  m_LocalScale: {x: 2.0075998, y: 2.0075998, z: 2.0075998}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 100, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 46906973134780285}
@@ -580,8 +574,8 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 1, g: 0, b: 0, a: 1}
-  m_Intensity: 7.4
-  m_Range: 269.5
+  m_Intensity: 300
+  m_Range: 300
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
@@ -641,4 +635,4 @@ Halo:
   m_Color:
     serializedVersion: 2
     rgba: 4278321407
-  m_Size: 233.02
+  m_Size: 300

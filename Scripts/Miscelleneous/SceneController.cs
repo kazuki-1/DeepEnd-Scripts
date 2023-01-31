@@ -16,7 +16,7 @@ public class SceneController : MonoBehaviour
     CanvasGroup cg;
     float targetAlpha = 0.0f;
 
-
+    bool showMouse = false;
     static public SceneController Get()
     {
         return GameObject.Find("Canvas").GetComponent<SceneController>();
@@ -89,4 +89,14 @@ public class SceneController : MonoBehaviour
         }
     }
 
+    public void ShowCursor()
+    {
+        showMouse = Cursor.visible =  true;
+
+    }
+
+    public void HideCursor()
+    {
+        showMouse = Cursor.visible = false;
+    }
 }

@@ -53,6 +53,18 @@ public class BatteryRoundScript : MonoBehaviour
     void Update()
     {
 
+
+
+        // Allows the minimap indicator to appear above water
+        // So as to not allow the water to block it
+        Transform minimapTransform = GetComponentInChildren<Light>().transform;
+        Vector3 p = minimapTransform.position;
+        p.y = 10.0f;
+        minimapTransform.transform.position = p;
+
+
+
+
         // Movement 
         {
             if (!hasCollided)
@@ -92,8 +104,10 @@ public class BatteryRoundScript : MonoBehaviour
         {
 
             if (other.gameObject.name == "DeepEndPlayer")
-                MainController.Get().GetStats().LogTorpedoHit();
+                MainController.Get().GetStats().LogCannonHit();
 
+            if (other.gameObject.GetComponent<DeepEndEnemyController>() != null)
+                MainController.Get().GetStats().LogHit(ArmamentController.Armaments.AimedTorpedo);
 
             // Instantiates the particle system
             other.gameObject.GetComponent<DeepEndEntityController>().TakeDamage(MainController.Get().batteryParameters.damage);

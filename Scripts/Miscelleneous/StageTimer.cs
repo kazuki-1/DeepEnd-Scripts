@@ -46,4 +46,9 @@ public class StageTimer : MonoBehaviour
 
         timer.Execute();
     }
+
+    public bool IsDone()
+    {
+        return timer.Done();
+    }
 }

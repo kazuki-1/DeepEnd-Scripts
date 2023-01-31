@@ -44,6 +44,7 @@ public class Pause : MonoBehaviour
         canvasGroup.alpha = 0.0f;
         isPaused = true;
         Time.timeScale = 0.0f;
+        SceneController.Get().ShowCursor();
     }
 
 
@@ -79,11 +80,13 @@ public class Pause : MonoBehaviour
         Time.timeScale = 1.0f;
         isPaused = false;
 
+        SceneController.Get().HideCursor();
+
     }
 
     public void ResumeApp()
     {
-        isPaused = false;
+        Exit();
     }
 
     public void PauseApp()

@@ -57,11 +57,17 @@ public class CannonController : ArmamentBase
     public override List<Vector3> GetTargetDirections()
     {
         List<Vector3> result = new List<Vector3>();
+        Quaternion quart = GetComponentInParent<DeepEndEntityController>().transform.rotation;
 
-        Vector3 origin = transform.position;
+
+        Vector3 origin = transform.localPosition;
         //Debug.Log(origin);
+
+        Vector3 right = Vector3.Cross(transform.up, starting_direction);
+
+
         origin.y -= 10.0f;
-        Vector3 originLeft = origin - transform.right * 10.0f;
+        Vector3 originLeft = origin - transform.right *  10.0f;
         Vector3 originRight = origin + transform.right * 10.0f;
 
         Vector3 endLeft = originLeft + transform.forward * 1000.0f;

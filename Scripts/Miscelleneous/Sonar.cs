@@ -65,10 +65,16 @@ public class Sonar : MonoBehaviour
         playSonarSound.Post(player);
         isActivated = true;
         effectTimer.Reset();
+        cooldownTimer.Reset();
     }
     public void Deactivate()
     {
         stopSonarSound.Post(player);
         isActivated = false;
+    }
+
+    public float GetCooldownTime()
+    {
+        return cooldownTimer.GetRemainingTime();
     }
 }

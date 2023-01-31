@@ -20,6 +20,7 @@ namespace AK
         static const AkUniqueID PAUSESONAR = 2666579542U;
         static const AkUniqueID PAUSESUBSOUND = 870539110U;
         static const AkUniqueID PLAYFIRESOUND = 3204389624U;
+        static const AkUniqueID PLAYFOGAMBIENT = 4027899003U;
         static const AkUniqueID PLAYSHIPSOUND = 1242247530U;
         static const AkUniqueID PLAYSHIPSUNKSOUND = 3093419889U;
         static const AkUniqueID PLAYSONAR = 2526104420U;

@@ -78,6 +78,16 @@ public class HomingTorpedoScript : MonoBehaviour
     void Update()
     {
 
+        // Allows the minimap indicator to appear above water
+        // So as to not allow the water to block it
+        Transform minimapTransform = GetComponentInChildren<Light>().transform;
+        Vector3 p = minimapTransform.position;
+        p.y = 10.0f;
+        minimapTransform.transform.position = p;
+
+
+
+        
         if (timer.OnPass(armingTime))
             isArmed = true;
 
@@ -120,13 +130,16 @@ public class HomingTorpedoScript : MonoBehaviour
 
         // Rotation
         {
-            Vector3 dist = target.position - transform.position;
-            dist.Normalize();
-
-            if (Vector3.Dot(transform.forward, dist) > 0)
+            if (!hasCollided)
             {
-                Quaternion lk = Quaternion.LookRotation(dist);
-                transform.rotation = Quaternion.Slerp(transform.rotation, lk, 0.05f);
+                Vector3 dist = target.position - transform.position;
+                dist.Normalize();
+
+                if (Vector3.Dot(transform.forward, dist) > 0)
+                {
+                    Quaternion lk = Quaternion.LookRotation(dist);
+                    transform.rotation = Quaternion.Slerp(transform.rotation, lk, 0.05f);
+                }
             }
         }
 
@@ -159,6 +172,9 @@ public class HomingTorpedoScript : MonoBehaviour
         if (other.gameObject.GetComponent<DeepEndEntityController>() != null)
         {
 
+                MainController.Get().GetStats().LogHit(ArmamentController.Armaments.AimedTorpedo);
+
+
             other.gameObject.GetComponent<DeepEndEntityController>().TakeDamage(MainController.Get().homingTorpedoParameters.damage);
 
             explosionParticle = Instantiate<GameObject>(explosionParticlePrefab, transform);
@@ -177,6 +193,7 @@ public class HomingTorpedoScript : MonoBehaviour
             GetComponentInChildren<MeshRenderer>().enabled = false;
             //Object.Destroy(gameObject);
             MainController.Get().GetStats().LogHit(ArmamentController.Armaments.HomingTorpedo);
+            target = null;
 
 
         }

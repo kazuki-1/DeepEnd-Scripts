@@ -18,7 +18,7 @@ public class MainMenu : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        SceneController.Get().ShowCursor();
         startButton.onClick.AddListener(SceneController.Get().ToGame);
         tutorialButton.onClick.AddListener(SceneController.Get().ToTutorial);
         quitButton.onClick.AddListener(SceneController.Get().Quit);
