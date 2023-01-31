@@ -33,7 +33,7 @@ public class DeepEndPlayerController : DeepEndEntityController
     public Vector3 movement = new Vector3();      // Player velocity
 
     [HideInInspector]
-    public int accel_state;     // Stage of acceleration
+    public int accel_state = 3;     // Stage of acceleration
 
     static private float acceleration_flatRate;    // Acceleration per frame
     private Vector3 default_speed;
@@ -88,7 +88,7 @@ public class DeepEndPlayerController : DeepEndEntityController
 
         DebugControls();
         if (Input.GetKeyDown(KeyCode.Escape))
-            Application.Quit();
+            Pause.Get().PauseApp();
 
     }
 

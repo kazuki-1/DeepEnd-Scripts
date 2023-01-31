@@ -540,7 +540,7 @@ MonoBehaviour:
         ObjectType: 3
         guid: 3485761fb9c13b46806c78cc9ce24399
       Path: Events\Default Work Unit\SFX\PlayFireSound
-      maxAttenuation: 1000
+      maxAttenuation: 1500
       maxDuration: 4.173084
       minDuration: 4.173084
     - name: PlayShipSound
@@ -560,7 +560,7 @@ MonoBehaviour:
         ObjectType: 3
         guid: a23c61348ef0364e9c19f131570eb62d
       Path: Events\Default Work Unit\ShipSounds\PlayShipSound
-      maxAttenuation: 1000
+      maxAttenuation: 1500
       maxDuration: -1
       minDuration: -1
     - name: PlaySonar
@@ -580,7 +580,7 @@ MonoBehaviour:
         ObjectType: 3
         guid: 6a6c053b07a82740949da3486ca34b63
       Path: Events\Default Work Unit\SFX\PlaySonar
-      maxAttenuation: 1000
+      maxAttenuation: 1500
       maxDuration: -1
       minDuration: -1
     - name: PlaySubSound
@@ -600,7 +600,7 @@ MonoBehaviour:
         ObjectType: 3
         guid: e37704658018bb4cb6dc45cdb29feffe
       Path: Events\Default Work Unit\ShipSounds\PlaySubSound
-      maxAttenuation: 1000
+      maxAttenuation: 1500
       maxDuration: -1
       minDuration: -1
     - name: PlayTorpedoHitSound
@@ -620,7 +620,7 @@ MonoBehaviour:
         ObjectType: 3
         guid: 4d5fb3d385aa134e8aae2e5a58f97f1f
       Path: Events\Default Work Unit\SFX\PlayTorpedoHitSound
-      maxAttenuation: 1000
+      maxAttenuation: 1500
       maxDuration: 3.245193
       minDuration: 3.245193
     - name: ResumeAll
@@ -745,7 +745,7 @@ MonoBehaviour:
         guid: 21fc4bc26d43c8449d6a56fc05cde4e6
       Path: Triggers\Default Work Unit\PlaySound
   ExpandedFileSystemItemIds: 
-  ExpandedWaapiItemIds: 
+  ExpandedWaapiItemIds: 05000000060000000b0000000f00000010000000
   AutoSyncSelection: 0
   autoPopulateEnabled: 1
   currentDataSource: 0

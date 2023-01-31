@@ -122,6 +122,10 @@ public class ArmamentController : MonoBehaviour
 
     public virtual void FireArmaments()
     {
+
+        if (Pause.Get().IsPaused() || Pause.Get().IsPaused())
+            return;
+
         if(Input.GetMouseButtonDown(0))             // Left click
         {
             ArmamentList cur = armaments[(int)current_armament];

@@ -64,7 +64,7 @@ public class AimedTorpedoScript : MonoBehaviour
                 movement.x *= .9f;
                 movement.z *= .9f;
 
-                movement.y -= 1.0f * Time.deltaTime;
+                movement.y -= 1.0f;
             }
             // Underwater
             else
@@ -73,16 +73,16 @@ public class AimedTorpedoScript : MonoBehaviour
                 pos.y = 0.0f;
                 waterTrailEffect.GetComponent<Transform>().position = pos;
 
-                if (movement.magnitude < MainController.Get().maximumTorpedoSpeed * Time.deltaTime)
+                if (movement.magnitude < MainController.Get().maximumTorpedoSpeed)
                 {
-                    movement += direction * speed * Time.deltaTime;
+                    movement += direction * speed ;
                     movement.y = 0;
                 }
             }
         }
 
         if (!hasCollided)
-            transform.position += movement;
+            transform.position += movement * Time.deltaTime;
 
 
         // Destroy conditions

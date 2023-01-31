@@ -27,6 +27,7 @@ public class DeepEndEntityController : MonoBehaviour
     public void Destroy()
     {
         GameObject.Destroy(gameObject);
+        GetComponentInChildren<AudioInterface>().Pause();
     }
 
 
@@ -59,5 +60,10 @@ public class DeepEndEntityController : MonoBehaviour
     virtual public void Transition(int next_)
     {
         stateMachine.Transition(next_);
+    }
+
+    public StateMachineBase GetStateMachine()
+    {
+        return stateMachine;
     }
 }

@@ -221,14 +221,17 @@ namespace SubmarineStates
         {
 
 
-
+            float f_distance = Vector3.Distance(parent.transform.position, controller.target.position);
+            float timeToPosition = f_distance / MainController.Get().maximumTorpedoSpeed;
+            Vector3 predictedPosition = controller.target.position + 
+                                        controller.target.GetComponent<DeepEndPlayerController>().GetMovementVector() * timeToPosition;
 
 
 
             cur_speed += (controller.maximumSpeed / 10.0f) * Time.deltaTime;        // takes 10 seconds to reach maximum speed;
             cur_speed = Mathf.Clamp(cur_speed, 0.0f, controller.maximumSpeed);
 
-            Vector3 distance = controller.target.transform.position - controller.transform.position;
+            Vector3 distance = predictedPosition - controller.transform.position;
             Vector3 direction = distance.normalized;
 
 
@@ -265,21 +268,26 @@ namespace SubmarineStates
 
     public class SubmarineState_Sunk : SubmarineState_Base
     {
-
+        GameObject fx;
         public override void Initialize(GameObject parent)
         {
-            MainController.Get().GetStats().LogSunk(EnemySpawner.EnemyType.Submarine);
-            controller.Destroy();
+            MainController.Get().GetStats().LogSunk(EnemySpawner.EnemyType.Destroyer);
+            fx = GameObject.Instantiate(controller.defeatEffectPrefab, parent.transform);
+            fx.transform.localScale = new Vector3(20, 20, 20);
+            fx.transform.localPosition = Vector3.zero;
+            controller.defeatSFXEvent.Post(parent);
         }
 
         public override void Execute(GameObject parent)
         {
+            if (!fx.GetComponent<ParticleSystem>().IsAlive())
+                End(parent);
 
         }
 
         public override void End(GameObject parent)
         {
-
+            GetStateMachine().Destroy();
         }
 
 

@@ -24,20 +24,21 @@ public class AimedTorpedoTubeController : ArmamentBase
         starting_position = transform.position;
         starting_direction = transform.forward;
 
-        fireEvent = MainController.Get().aimedTorpedoParameters.fireSFXEvent;
-        if (fireEvent != null)
-            fireEvent.Post(gameObject);
-
     }
 
     public override void Fire()
     {
         ArmamentController controller = GetComponentInParent<ArmamentController>();
             if ((!outOfBounds && !isReloading ) &&  controller.CheckAmmo())
-        {
+            {
             stateMachine.Transition((int)AimedTorpedoStateMachine.StateEnum.Fire);
             controller.munitions.aimedTorpedo -= barrel_count;
-        }
+            }
+
+        fireEvent = MainController.Get().aimedTorpedoParameters.fireSFXEvent;
+        if (fireEvent != null)
+            fireEvent.Post(gameObject);
+
     }
 
     public override void RotateToPoint(Vector3 point)

@@ -38,7 +38,11 @@ public class DestroyerArmamentController : ArmamentController
 
     public override void FireArmaments()
     {
-        foreach(ArmamentList armamentList in armaments)
+        if (Pause.Get().IsPaused() || !CheckAmmo())
+            return;
+
+
+        foreach (ArmamentList armamentList in armaments)
         {
             foreach(ArmamentBase armament in armamentList.list)
             {

@@ -86,6 +86,14 @@ public class Timer
         return remaining_time > tm;
     }
 
+    public bool OnPassOnce(float tm)
+    {
+        float prev_time = remaining_time - Time.deltaTime;
+        if (prev_time < tm && remaining_time > tm)
+            return true;
+        return false;
+    }
+
     /// <summary>
     /// Returns true everytime the timer passes the given time
     /// </summary>

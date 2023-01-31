@@ -40,6 +40,12 @@ public class StateMachineBase
 
     }
 
+    public void Destroy()
+    {
+        states.Clear();
+        Object.Destroy(parent.GetComponent<DeepEndEntityController>().gameObject);
+    }
+
     ~StateMachineBase()
     {
         foreach (var state in states)   

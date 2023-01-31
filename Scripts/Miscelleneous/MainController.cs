@@ -227,6 +227,27 @@ public class MainController : MonoBehaviour
 
     }
 
+    public void PauseApplication()
+    {
+        Pause.Get().PauseApp();
+    }
+
+    public void ResumeApplication()
+    {
+        Pause.Get().ResumeApp();
+    }
+
+    public void QuitToMainMenu()
+    {
+        // TODO
+        SceneController.Get().ToMainMenu();
+    }
+
+    public void Shutdown()
+    {
+        SceneController.Get().Quit();
+    }
+
 
 
 }

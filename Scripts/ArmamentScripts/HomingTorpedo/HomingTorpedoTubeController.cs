@@ -38,9 +38,6 @@ public class HomingTorpedoTubeController : ArmamentBase
         starting_direction = transform.forward;
         starting_position = transform.position;
 
-        fireEvent = MainController.Get().homingTorpedoParameters.fireSFXEvent;
-        if (fireEvent != null)
-            fireEvent.Post(gameObject);
 
 
     }
@@ -58,9 +55,12 @@ public class HomingTorpedoTubeController : ArmamentBase
         if (!isReloading)
             stateMachine.Transition((int)HomingTorpedoStateMachine.StateEnum.Target);
 
-
     }
 
+    public void PostSFXEvent()
+    {
+        fireEvent.Post(gameObject);
+    }
 
     public override void OnDrawGizmosSelected()
     {

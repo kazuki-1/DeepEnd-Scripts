@@ -84,32 +84,36 @@ public class HomingTorpedoScript : MonoBehaviour
 
         // Movement
         {
-            if (!hasHitWater)
+            if (!hasCollided)
             {
-                // Moment after launching from tubes
-                movement.x *= .9f;
-                movement.z *= .9f;
 
-                movement.y -= 1.0f * Time.deltaTime;
-            }
-            // Underwater
-            else
-            {
-                Vector3 pos = waterTrailEffect.transform.position;
-                pos.y = 0.0f;
-                waterTrailEffect.transform.position = pos;
-
-
-
-                Vector3 distance = target.position - transform.position;
-                Vector3 direction = distance.normalized;
-
-                if (speed < MainController.Get().maximumTorpedoSpeed)
+                if (!hasHitWater)
                 {
-                    speed += MainController.Get().homingTorpedoParameters.speed;
+                    // Moment after launching from tubes
+                    movement.x *= .9f;
+                    movement.z *= .9f;
+
+                    movement.y -= 1.0f * Time.deltaTime;
                 }
-                movement = transform.forward * speed * Time.deltaTime;
-                movement.y = 0;
+                // Underwater
+                else
+                {
+                    Vector3 pos = waterTrailEffect.transform.position;
+                    pos.y = 0.0f;
+                    waterTrailEffect.transform.position = pos;
+
+
+
+                    Vector3 distance = target.position - transform.position;
+                    Vector3 direction = distance.normalized;
+
+                    if (speed < MainController.Get().maximumTorpedoSpeed)
+                    {
+                        speed += MainController.Get().homingTorpedoParameters.speed;
+                    }
+                    movement = transform.forward * speed * Time.deltaTime;
+                    movement.y = 0;
+                }
             }
         }
 

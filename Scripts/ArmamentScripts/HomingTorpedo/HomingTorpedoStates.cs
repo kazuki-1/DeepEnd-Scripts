@@ -235,7 +235,7 @@ namespace HomingTorpedoStates
 
             }
 
-
+            controller.PostSFXEvent();
             Transition((int)HomingTorpedoStateMachine.StateEnum.Reload);
 
         }

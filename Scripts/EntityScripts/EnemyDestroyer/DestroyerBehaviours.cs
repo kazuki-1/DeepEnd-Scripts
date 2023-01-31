@@ -96,7 +96,7 @@ namespace DestroyerStates
             direction = target.forward;
             target_rotation = Quaternion.FromToRotation(Vector3.forward, direction.normalized);
             transform.rotation = Quaternion.Lerp(transform.rotation, target_rotation, 0.7f * Time.deltaTime);
-            transform.position += parent.transform.forward * controller.movementSpeed * Time.deltaTime;
+            transform.position += parent.transform.forward * controller.movementSpeed * Time.deltaTime * .5f;
             controller.GetComponent<ArmamentController>().FireArmaments();
 
             if (!controller.GetComponent<DestroyerArmamentController>().CheckAmmo())
@@ -146,26 +146,33 @@ namespace DestroyerStates
 
     public class DestroyerState_Sink : DestroyerState_Base
     {
+        GameObject fx;
 
         public override void Initialize(GameObject parent)
         {
             //controller.Sink();
             // Placeholder
             MainController.Get().GetStats().LogSunk(EnemySpawner.EnemyType.Destroyer);
-            controller.Destroy();
+            fx = GameObject.Instantiate(controller.defeatEffectPrefab, parent.transform);
+            fx.transform.localScale = new Vector3(20, 20, 20);
+            fx.transform.localPosition = Vector3.zero;
+            controller.defeatSFXEvent.Post(parent);
+            //controller.Destroy();
         }
 
         public override void Execute(GameObject parent)
         {
 
-
-
+            if (!fx.GetComponent<ParticleSystem>().IsAlive())
+                End(parent);
+               
 
         }
 
         public override void End(GameObject parent)
         {
 
+            GetStateMachine().Destroy();
         }
 
 

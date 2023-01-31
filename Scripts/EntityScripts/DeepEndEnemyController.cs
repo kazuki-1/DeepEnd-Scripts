@@ -6,6 +6,9 @@ public class DeepEndEnemyController : DeepEndEntityController
 {
     public float maximumSpeed = 30.0f;
 
+    public GameObject defeatEffectPrefab;
+    public AK.Wwise.Event defeatSFXEvent;
+
     [HideInInspector]
     public float movementSpeed;
     // Start is called before the first frame update

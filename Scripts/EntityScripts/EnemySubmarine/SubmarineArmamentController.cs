@@ -40,16 +40,24 @@ public class SubmarineArmamentController : ArmamentController
 
     public override void FireArmaments()
     {
-        if (!CheckAmmo())
+        if (!CheckAmmo() || Pause.Get().IsPaused())
             return;
         Vector3 dist = transform.position - target.position;
         float time = dist.magnitude / (MainController.Get().maximumTorpedoSpeed * Time.deltaTime);
         Math.Round(time, 2);
-        Vector3 target_pos = MainController.Get().SimulateVectorMovement(target.position, /*target.GetComponent<DeepEndPlayerController>().GetMovementVector()*/Vector3.zero, time);
         foreach (ArmamentList armamentList in armaments)
         {
             foreach (ArmamentBase armament in armamentList.list)
             {
+
+                float distanceToTarget = Vector3.Distance(armament.transform.position, target.position);
+                float timeToTarget = distanceToTarget / MainController.Get().maximumTorpedoSpeed;
+                Vector3 target_pos = MainController.Get().SimulateVectorMovement(target.position, target.GetComponent<DeepEndPlayerController>().GetMovementVector()/*Vector3.zero*/, timeToTarget);
+
+
+
+
+
                 if (armament.GetState() && armament.CheckDirectionToTarget(target_pos, 10.0f))
                     armament.Fire();
             }

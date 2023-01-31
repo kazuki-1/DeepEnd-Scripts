@@ -50,6 +50,11 @@ public class EnemySpawner : MonoBehaviour
     /*-----------------------------Functions----------------------*/
     /*------------------------------------------------------------*/
 
+    static public EnemySpawner Get()
+    {
+        return GameObject.Find("SpawningSystem").GetComponent<EnemySpawner>();
+    }
+
 
     // Start is called before the first frame update
     void Start()
@@ -116,6 +121,12 @@ public class EnemySpawner : MonoBehaviour
         MainController.Get().GetStats().LogSpawned(itr);
     }
 
+    public GameObject Spawn(EnemyType itr, Vector3 pos)
+    {
+        GameObject obj = Instantiate<GameObject>(entities[itr].entityPrefab, pos, Quaternion.identity);
+        MainController.Get().GetStats().LogSpawned(itr);
+        return obj;
+    }
     private void OnDrawGizmos()
     {
 
